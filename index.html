@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aya App - آية كل يوم</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body{
+    background:#f4f6f9;
+    font-family:'Segoe UI', Arial, 'Traditional Arabic';
+    padding-top:95px;
+    padding-bottom:75px;
+    direction: rtl;
+}
+:root{
+    --main:#198754;
+    --dark:#146c43;
+    --border-green:#2ecc71;
+    --border-dark:#27ae60;
+}
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:linear-gradient(135deg,var(--main),var(--dark));
+    color:white;
+    padding:12px 10px;
+    z-index:1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-title{
+    font-size:18px;
+    font-weight:bold;
+    text-align: center;
+    flex-grow:1;
+}
+.header-sub{
+    font-size:12px;
+    opacity:0.9;
+}
+.header-left, .header-right{
+    width: 45px;
+}
+.admin-header-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:linear-gradient(135deg,var(--main),var(--dark));
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:12px;
+    z-index:1000;
+}
+.card-box{
+    margin:12px;
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,0.08);
+}
+
+/* ========== CARTE COMMENTAIRE AVEC BORDURE VERTE ========== */
+.comment-card {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    /* Bordure verte visible */
+    border: 3px solid var(--border-green);
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
+}
+.comment-card:hover {
+    border-color: var(--border-dark);
+    box-shadow: 0 6px 18px rgba(46, 204, 113, 0.25);
+    transform: translateY(-2px);
+}
+
+/* ========== EN-TÊTE DU COMMENTAIRE ========== */
+.comment-main {
+    padding: 18px;
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+}
+.comment-main:hover {
+    background: #fefefe;
+}
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #e8f5e9;
+    padding-bottom: 10px;
+}
+.comment-name {
+    font-weight: bold;
+    color: var(--main);
+    font-size: 16px;
+}
+.comment-name i {
+    margin-left: 8px;
+    color: var(--main);
+}
+.comment-date {
+    font-size: 11px;
+    color: #adb5bd;
+    background: #f8f9fa;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+.comment-text {
+    margin: 15px 0;
+    line-height: 1.8;
+    color: #212529;
+    text-align: right;
+    font-size: 16px;
+    padding: 8px 0;
+}
+.comment-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #e8f5e9;
+}
+
+/* ========== BOUTONS ========== */
+.reply-btn {
+    background: none;
+    border: 2px solid var(--main);
+    color: var(--main);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 6px 16px;
+    border-radius: 25px;
+    transition: all 0.2s;
+    margin-right: 8px;
+    font-weight: bold;
+}
+.reply-btn:hover {
+    background: var(--main);
+    color: white;
+    transform: scale(1.02);
+}
+.btn-like {
+    background: none;
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    padding: 6px 16px;
+    border-radius: 25px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+.btn-like:hover {
+    background: #dc3545;
+    color: white;
+    transform: scale(1.02);
+}
+.btn-delete {
+    background: none;
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    padding: 6px 16px;
+    border-radius: 25px;
+    font-size: 12px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+.btn-delete:hover {
+    background: #dc3545;
+    color: white;
+    transform: scale(1.02);
+}
+
+/* ========== SECTION DES RÉPONSES ========== */
+.replies-section {
+    background: #f0fdf4;
+    border-top: 3px solid var(--border-green);
+    padding: 15px 18px;
+}
+.replies-header {
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px dashed #c8e6d9;
+}
+.toggle-replies-btn {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
+    border: 1px solid var(--border-green);
+    color: var(--dark);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 6px 16px;
+    border-radius: 25px;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+.toggle-replies-btn:hover {
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
+    border-color: var(--main);
+}
+.replies-container {
+    margin-top: 12px;
+}
+
+/* ========== SOUS-COMMENTAIRE (RÉPONSE) ========== */
+.sub-comment {
+    margin-right: 45px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+    border-right: 5px solid var(--border-green);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+}
+.sub-comment:last-child {
+    margin-bottom: 0;
+}
+.sub-comment:hover {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+    transform: translateX(-3px);
+    border-right-width: 6px;
+}
+.sub-comment .comment-header {
+    border-bottom: 1px solid #e8f5e9;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+}
+.sub-comment .comment-text {
+    font-size: 14px;
+    margin: 10px 0;
+    line-height: 1.7;
+}
+.reply-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
+    color: var(--dark);
+    font-size: 10px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-weight: bold;
+    border: 1px solid var(--border-green);
+}
+.reply-to {
+    font-size: 11px;
+    color: #6c757d;
+    margin-left: 8px;
+    background: #f8f9fa;
+    padding: 2px 8px;
+    border-radius: 15px;
+}
+.reply-to i {
+    color: var(--main);
+    font-size: 11px;
+    margin-left: 5px;
+}
+.no-replies {
+    text-align: center;
+    color: #adb5bd;
+    font-size: 13px;
+    padding: 20px;
+    font-style: italic;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+/* ========== BADGE DE COMPTEUR ========== */
+.reply-count-badge {
+    background: var(--main);
+    color: white;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-right: 8px;
+}
+
+/* ========== AUTRES STYLES ========== */
+input, textarea{
+    border-radius:10px !important;
+}
+.soura-info {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+.soura-name-ar {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--main);
+}
+.aya-text {
+    font-size: 24px;
+    text-align: right;
+    line-height: 1.8;
+    margin: 20px 0;
+    font-family: 'Traditional Arabic', serif;
+}
+.sadaq-allah {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--main);
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+}
+.date-info {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    margin-top: 10px;
+}
+.loading-spinner {
+    text-align: center;
+    padding: 20px;
+}
+.today-badge {
+    background: var(--main);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    margin-right: 8px;
+}
+.refresh-btn {
+    background: none;
+    border: none;
+    color: var(--main);
+    cursor: pointer;
+    padding: 5px;
+}
+.comment-count {
+    font-size: 12px;
+    color: #666;
+    margin-right: 8px;
+}
+.admin-badge {
+    background: #ffc107;
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    margin-left: 10px;
+}
+.toast-notification {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    z-index: 999;
+    animation: fadeOut 3s forwards;
+}
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+.reply-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 11000;
+    align-items: center;
+    justify-content: center;
+}
+.reply-modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    max-width: 450px;
+    width: 90%;
+}
+.modal-welcome {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-content-welcome {
+    background: white;
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+}
+.modal-title-welcome {
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--main);
+    margin-bottom: 20px;
+}
+.modal-divider {
+    width: 80px;
+    height: 3px;
+    background: var(--main);
+    margin: 0 auto 25px auto;
+}
+.modal-text-welcome {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 35px;
+}
+.modal-btn-welcome {
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
+    border: none;
+    padding: 14px 48px;
+    border-radius: 60px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-left"></div>
+    <div>
+        <div class="header-title">📖 آية كل يوم</div>
+        <div class="header-sub">أضف تعليقك على الآية الكريمة</div>
+    </div>
+    <div class="header-right">
+        <button class="admin-header-btn" onclick="adminLogin()">
+            <i class="fa fa-lock"></i>
+        </button>
+    </div>
+</div>
+
+<div class="card-box" id="ayahBox">
+    <div class="loading-spinner">
+        <div class="spinner-border text-success" role="status"></div>
+        <p>جاري تحميل الآية...</p>
+    </div>
+</div>
+
+<div class="card-box">
+    <input id="name" class="form-control mb-2" placeholder="👤 اسمك">
+    <textarea id="text" class="form-control" rows="3" placeholder="📝 اكتب تعليقك..."></textarea>
+    <button id="sendBtn" class="btn btn-success w-100 mt-2" onclick="addComment()">
+        <i class="fa fa-paper-plane"></i> إرسال التعليق
+    </button>
+</div>
+
+<div class="card-box">
+    <h6>
+        💬 تعليقات آية اليوم
+        <button class="refresh-btn" onclick="loadComments(true)">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+        <span class="today-badge" id="todayBadge"></span>
+        <span class="comment-count" id="commentCount"></span>
+        <span id="adminBadge" class="admin-badge" style="display:none;">👑 المشرف</span>
+    </h6>
+    <div id="comments"></div>
+</div>
+
+<div class="footer">
+    من تصميم : م.الصديق الإدريسي
+</div>
+
+<div id="replyModal" class="reply-modal">
+    <div class="reply-modal-content">
+        <h5 style="color: var(--main); text-align: center;">
+            <i class="fas fa-reply-all"></i> الرد على التعليق
+        </h5>
+        <div style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:15px; font-size:13px; color:#666;" id="replyingToText"></div>
+        <input type="text" id="replyName" class="form-control mb-2" placeholder="👤 اسمك">
+        <textarea id="replyText" class="form-control" rows="3" placeholder="✏️ اكتب ردك..."></textarea>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="btn btn-success" style="flex:1" onclick="submitReply()">
+                <i class="fas fa-paper-plane"></i> إرسال الرد
+            </button>
+            <button class="btn btn-secondary" style="flex:1" onclick="closeReplyModal()">
+                <i class="fas fa-times"></i> إلغاء
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="welcomeModal" class="modal-welcome">
+    <div class="modal-content-welcome">
+        <div class="modal-title-welcome">مرحباً بك</div>
+        <div class="modal-divider"></div>
+        <div class="modal-text-welcome">
+            نرحب بكم في تطبيق <strong>آية كل يوم</strong><br><br>
+            نتمنى أن تشاركونا بتعليقاتكم وتفسيراتكم<br>
+            لآية اليوم الكريمة<br><br>
+            جزاكم الله خيراً
+        </div>
+        <button class="modal-btn-welcome" onclick="closeWelcomeModal()">دخول</button>
+    </div>
+</div>
+
+<script>
+// ==================== CONFIGURATION ====================
+// ⚠️ IMPORTANT: Remplacez cette URL par celle de votre déploiement Apps Script
+const API_URL = "https://script.google.com/macros/s/AKfycbyV11qMDxMJYeLfzjTD1qsbZuP2_9-7mzIzqvFG5wCr1UFc8qzVDMVASP3WihKfAiz7rQ/exec";
+
+let isAdmin = false;
+let currentReplyParent = null;
+let currentReplyParentName = "";
+
+// ==================== FONCTIONS MODALES ====================
+function showWelcomeModal() {
+    document.getElementById('welcomeModal').style.display = 'flex';
+}
+function closeWelcomeModal() {
+    document.getElementById('welcomeModal').style.display = 'none';
+}
+function openReplyModal(parentId, parentName) {
+    currentReplyParent = parentId;
+    currentReplyParentName = parentName;
+    document.getElementById('replyingToText').innerHTML = `الرد على: <strong>${escapeHtml(parentName)}</strong>`;
+    document.getElementById('replyName').value = '';
+    document.getElementById('replyText').value = '';
+    document.getElementById('replyModal').style.display = 'flex';
+}
+function closeReplyModal() {
+    document.getElementById('replyModal').style.display = 'none';
+}
+
+// ==================== FONCTIONS UTILITAIRES ====================
+function getTodayKey() {
+    const today = new Date();
+    return `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+}
+
+function getDailyNumber(max, seed) {
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) {
+        hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+        hash = hash & hash;
+    }
+    return (Math.abs(Math.sin(hash) * 10000) % max) + 1;
+}
+
+function convertToDateKey(dateValue) {
+    if (!dateValue) return null;
+    try {
+        let date = new Date(dateValue);
+        if (isNaN(date.getTime())) return null;
+        return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+    } catch(e) { 
+        return null; 
+    }
+}
+
+function showNotification(message, isError = false) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.style.background = isError ? 'rgba(220,53,69,0.9)' : 'rgba(25,135,84,0.9)';
+    toast.innerHTML = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+document.getElementById('todayBadge').innerHTML = getTodayKey();
+
+// ==================== NOMS DES SOURATES ====================
+const sourateNamesAr = {
+    "Al-Fatiha": "الفاتحة", "Al-Baqarah": "البقرة", "Aal-E-Imran": "آل عمران",
+    "An-Nisa": "النساء", "Al-Ma'idah": "المائدة", "Al-An'am": "الأنعام",
+    "Al-A'raf": "الأعراف", "Al-Anfal": "الأنفال", "At-Tawbah": "التوبة",
+    "Yunus": "يونس", "Hud": "هود", "Yusuf": "يوسف", "Ar-Ra'd": "الرعد",
+    "Ibrahim": "إبراهيم", "Al-Hijr": "الحجر", "An-Nahl": "النحل",
+    "Al-Isra": "الإسراء", "Al-Kahf": "الكهف", "Maryam": "مريم",
+    "Ta-Ha": "طه", "Al-Anbiya": "الأنبياء", "Al-Hajj": "الحج",
+    "Al-Mu'minun": "المؤمنون", "An-Nur": "النور", "Al-Furqan": "الفرقان",
+    "Ash-Shu'ara": "الشعراء", "An-Naml": "النمل", "Al-Qasas": "القصص",
+    "Al-Ankabut": "العنكبوت", "Ar-Rum": "الروم", "Luqman": "لقمان",
+    "As-Sajdah": "السجدة", "Al-Ahzab": "الأحزاب", "Saba": "سبأ",
+    "Fatir": "فاطر", "Ya-Sin": "يس", "As-Saffat": "الصافات",
+    "Sad": "ص", "Az-Zumar": "الزمر", "Ghafir": "غافر", "Fussilat": "فصلت",
+    "Ash-Shura": "الشورى", "Az-Zukhruf": "الزخرف", "Ad-Dukhan": "الدخان",
+    "Al-Jathiya": "الجاثية", "Al-Ahqaf": "الأحقاف", "Muhammad": "محمد",
+    "Al-Fath": "الفتح", "Al-Hujurat": "الحجرات", "Qaf": "ق",
+    "Adh-Dhariyat": "الذاريات", "At-Tur": "الطور", "An-Najm": "النجم",
+    "Al-Qamar": "القمر", "Ar-Rahman": "الرحمن", "Al-Waqi'a": "الواقعة",
+    "Al-Hadid": "الحديد", "Al-Mujadila": "المجادلة", "Al-Hashr": "الحشر",
+    "Al-Mumtahanah": "الممتحنة", "As-Saff": "الصف", "Al-Jumu'ah": "الجمعة",
+    "Al-Munafiqun": "المنافقون", "At-Taghabun": "التغابن", "At-Talaq": "الطلاق",
+    "At-Tahrim": "التحريم", "Al-Mulk": "الملك", "Al-Qalam": "القلم",
+    "Al-Haqqah": "الحاقة", "Al-Ma'arij": "المعارج", "Nuh": "نوح",
+    "Al-Jinn": "الجن", "Al-Muzzammil": "المزمل", "Al-Muddaththir": "المدثر",
+    "Al-Qiyamah": "القيامة", "Al-Insan": "الإنسان", "Al-Mursalat": "المرسلات",
+    "An-Naba": "النبأ", "An-Nazi'at": "النازعات", "Abasa": "عبس",
+    "At-Takwir": "التكوير", "Al-Infitar": "الإنفطار", "Al-Mutaffifin": "المطففين",
+    "Al-Inshiqaq": "الإنشقاق", "Al-Buruj": "البروج", "At-Tariq": "الطارق",
+    "Al-A'la": "الأعلى", "Al-Ghashiyah": "الغاشية", "Al-Fajr": "الفجر",
+    "Al-Balad": "البلد", "Ash-Shams": "الشمس", "Al-Layl": "الليل",
+    "Ad-Duha": "الضحى", "Ash-Sharh": "الشرح", "At-Tin": "التين",
+    "Al-Alaq": "العلق", "Al-Qadr": "القدر", "Al-Bayyinah": "البينة",
+    "Az-Zalzalah": "الزلزلة", "Al-Adiyat": "العاديات", "Al-Qari'ah": "القارعة",
+    "At-Takathur": "التكاثر", "Al-Asr": "العصر", "Al-Humazah": "الهمزة",
+    "Al-Fil": "الفيل", "Quraish": "قريش", "Al-Ma'un": "الماعون",
+    "Al-Kawthar": "الكوثر", "Al-Kafirun": "الكافرون", "An-Nasr": "النصر",
+    "Al-Masad": "المسد", "Al-Ikhlas": "الإخلاص", "Al-Falaq": "الفلق", "An-Nas": "الناس"
+};
+
+// ==================== CHARGEMENT DE L'AYAH ====================
+async function loadAyah() {
+    try {
+        const todayKey = getTodayKey();
+        const sourateNumber = getDailyNumber(114, todayKey);
+        const versetNumber = getDailyNumber(10, todayKey + "verse");
+        const res = await fetch(`https://api.alquran.cloud/v1/ayah/${sourateNumber}:${versetNumber}`);
+        const data = await res.json();
+        let ayah;
+        if (data.data) {
+            ayah = {
+                sourateNameFr: data.data.surah.englishName,
+                sourateNameAr: sourateNamesAr[data.data.surah.englishName] || data.data.surah.name,
+                ayahNumber: data.data.numberInSurah,
+                ayahText: data.data.text
+            };
+        } else {
+            const fallbackRes = await fetch("https://api.alquran.cloud/v1/ayah/random");
+            const fallbackData = await fallbackRes.json();
+            ayah = {
+                sourateNameFr: fallbackData.data.surah.englishName,
+                sourateNameAr: sourateNamesAr[fallbackData.data.surah.englishName] || fallbackData.data.surah.name,
+                ayahNumber: fallbackData.data.numberInSurah,
+                ayahText: fallbackData.data.text
+            };
+        }
+        displayAyah(ayah);
+    } catch(error) {
+        document.getElementById("ayahBox").innerHTML = `<div class="text-center text-danger">خطأ في تحميل الآية</div>`;
+    }
+}
+
+function displayAyah(ayah) {
+    document.getElementById("ayahBox").innerHTML = `
+        <div class="soura-info">
+            <div class="soura-name-ar">${ayah.sourateNameAr}</div>
+            <div class="soura-name-fr">${ayah.sourateNameFr} - ${ayah.ayahNumber}</div>
+        </div>
+        <div class="aya-text">${ayah.ayahText}</div>
+        <div class="sadaq-allah">﴿ صدق الله العظيم ﴾</div>
+        <div class="date-info">📅 ${new Date().toLocaleDateString('ar-EG')}</div>
+    `;
+}
+
+// ==================== AJOUTER COMMENTAIRE PRINCIPAL ====================
+async function addComment() {
+    const nameInput = document.getElementById("name");
+    const textInput = document.getElementById("text");
+    const btn = document.getElementById("sendBtn");
+
+    if (!textInput.value.trim()) {
+        Swal.fire("خطأ", "اكتب تعليقاً", "error");
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+
+    const params = new URLSearchParams();
+    params.append('action', 'add');
+    params.append('name', nameInput.value.trim() || "مجهول");
+    params.append('text', textInput.value.trim());
+    params.append('dayKey', getTodayKey());
+    params.append('type', 'comment');
+    
+    try {
+        await fetch(`${API_URL}?${params.toString()}`, { method: 'GET', mode: 'no-cors' });
+        
+        nameInput.value = "";
+        textInput.value = "";
+        Swal.fire({ icon: 'success', title: 'تم الإضافة!', timer: 1500, showConfirmButton: false });
+        setTimeout(() => loadComments(true), 1000);
+    } catch(error) {
+        nameInput.value = "";
+        textInput.value = "";
+        Swal.fire({ icon: 'success', title: 'تم الإرسال!', timer: 1500, showConfirmButton: false });
+        setTimeout(() => loadComments(true), 1000);
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa fa-paper-plane"></i> إرسال التعليق';
+    }
+}
+
+// ==================== SOUMETTRE UNE RÉPONSE ====================
+async function submitReply() {
+    const nameInput = document.getElementById('replyName');
+    const textInput = document.getElementById('replyText');
+    const name = nameInput.value.trim() || 'مجهول';
+    const text = textInput.value.trim();
+    
+    if (!text) {
+        Swal.fire('خطأ', 'الرجاء كتابة الرد', 'error');
+        return;
+    }
+    
+    const parentId = currentReplyParent;
+    
+    if (!parentId) {
+        Swal.fire('خطأ', 'معرف التعليق الأصلي مفقود', 'error');
+        return;
+    }
+    
+    document.getElementById('replyModal').style.display = 'none';
+    
+    Swal.fire({ 
+        title: 'جاري الإرسال...', 
+        allowOutsideClick: false, 
+        didOpen: () => { Swal.showLoading(); }
+    });
+    
+    const params = new URLSearchParams();
+    params.append('action', 'add');
+    params.append('name', name);
+    params.append('text', text);
+    params.append('dayKey', getTodayKey());
+    params.append('parentId', parentId);
+    params.append('type', 'reply');
+    
+    try {
+        await fetch(`${API_URL}?${params.toString()}`, { method: 'GET', mode: 'no-cors' });
+        Swal.close();
+        Swal.fire({ icon: 'success', title: 'تم إرسال الرد!', timer: 1500, showConfirmButton: false });
+        
+        currentReplyParent = null;
+        currentReplyParentName = "";
+        
+        setTimeout(() => loadComments(true), 1000);
+    } catch(error) {
+        console.error("Erreur:", error);
+        Swal.close();
+        Swal.fire({ icon: 'success', title: 'تم الإرسال!', timer: 1500, showConfirmButton: false });
+        currentReplyParent = null;
+        currentReplyParentName = "";
+        setTimeout(() => loadComments(true), 1000);
+    }
+}
+
+// ==================== LIKES ====================
+async function likeComment(commentId, buttonElement) {
+    const likeSpan = buttonElement.querySelector('.like-count');
+    const currentLikes = likeSpan ? parseInt(likeSpan.textContent) : 0;
+    
+    buttonElement.disabled = true;
+    buttonElement.style.opacity = '0.6';
+    
+    if (likeSpan) {
+        likeSpan.textContent = currentLikes + 1;
+    }
+    
+    const params = new URLSearchParams();
+    params.append('action', 'like');
+    params.append('id', commentId);
+    
+    try {
+        const response = await fetch(`${API_URL}?${params.toString()}`);
+        const result = await response.json();
+        if (result.success && likeSpan) {
+            likeSpan.textContent = result.likes;
+            showNotification("❤️ تمت الإضافة!");
+        } else if (likeSpan) {
+            likeSpan.textContent = currentLikes;
+        }
+    } catch(error) {
+        if (likeSpan) {
+            likeSpan.textContent = currentLikes;
+        }
+        showNotification("❌ خطأ", true);
+    } finally {
+        buttonElement.disabled = false;
+        buttonElement.style.opacity = '1';
+    }
+}
+
+// ==================== SUPPRESSION ====================
+async function deleteComment(commentId, buttonElement) {
+    if (!isAdmin) {
+        showNotification("❌ وضع المشرف غير مفعل", true);
+        return;
+    }
+    
+    const confirm = await Swal.fire({
+        title: 'حذف التعليق',
+        text: 'هل أنت متأكد؟',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'نعم',
+        cancelButtonText: 'إلغاء'
+    });
+    
+    if (!confirm.isConfirmed) return;
+    
+    const params = new URLSearchParams();
+    params.append('action', 'delete');
+    params.append('id', commentId);
+    
+    try {
+        await fetch(`${API_URL}?${params.toString()}`);
+        showNotification("✅ تم الحذف!");
+        loadComments(true);
+    } catch(error) {
+        showNotification("❌ خطأ", true);
+    }
+}
+
+// ==================== CHARGER LES COMMENTAIRES ====================
+async function loadComments(showRefreshMessage = false) {
+    try {
+        const todayKey = getTodayKey();
+        const response = await fetch(API_URL);
+        const allData = await response.json();
+        
+        if (allData.error) throw new Error(allData.error);
+        
+        const allComments = allData.filter(c => convertToDateKey(c.dayKey) === todayKey);
+        const parentComments = allComments.filter(c => !c.parentId || c.parentId === "" || c.parentId === null || c.parentId === 0);
+        const replies = allComments.filter(c => c.parentId && c.parentId !== "" && c.parentId !== null && c.parentId !== 0);
+        
+        const repliesByParent = {};
+        replies.forEach(reply => {
+            const parentId = String(reply.parentId);
+            if (!repliesByParent[parentId]) repliesByParent[parentId] = [];
+            repliesByParent[parentId].push(reply);
+        });
+        
+        document.getElementById('commentCount').innerHTML = `(${parentComments.length})`;
+        
+        if (parentComments.length === 0) {
+            document.getElementById("comments").innerHTML = `
+                <div class="text-center text-muted py-4">
+                    <i class="fas fa-comment-dots fa-2x mb-2"></i>
+                    <p>لا توجد تعليقات لهذا اليوم</p>
+                    <small>كن أول من يعلق!</small>
+                </div>
+            `;
+            if (showRefreshMessage) showNotification("📭 لا توجد تعليقات");
+            return;
+        }
+        
+        let html = "";
+        parentComments.forEach(comment => {
+            const commentId = String(comment.id);
+            const commentReplies = repliesByParent[commentId] || [];
+            const replyCount = commentReplies.length;
+            
+            html += `
+                <div class="comment-card" data-id="${comment.id}">
+                    <div class="comment-main">
+                        <div class="comment-header">
+                            <span class="comment-name">
+                                <i class="fas fa-user-circle"></i> ${escapeHtml(comment.name)}
+                            </span>
+                            <span class="comment-date">${comment.date || ""}</span>
+                        </div>
+                        <div class="comment-text">${escapeHtml(comment.text)}</div>
+                        <div class="comment-actions">
+                            <button class="btn-like" onclick="likeComment(${comment.id}, this)">
+                                ❤️ <span class="like-count">${comment.likes || 0}</span>
+                            </button>
+                            <button class="reply-btn" onclick="openReplyModal(${comment.id}, '${escapeHtml(comment.name)}')">
+                                <i class="fas fa-reply"></i> رد
+                            </button>
+                            ${isAdmin ? `<button class="btn-delete" onclick="deleteComment(${comment.id}, this)">🗑 حذف</button>` : ''}
+                        </div>
+                    </div>
+                    <div class="replies-section">
+                        <div class="replies-header">
+                            <button class="toggle-replies-btn" onclick="toggleReplies(${comment.id})" id="toggle-btn-${comment.id}">
+                                <i class="fas fa-comments"></i> الردود (${replyCount})
+                                <i class="fas fa-chevron-down" id="toggle-icon-${comment.id}"></i>
+                            </button>
+                        </div>
+                        <div id="replies-${comment.id}" class="replies-container" style="display: block;">
+                            ${renderReplies(commentReplies)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        document.getElementById("comments").innerHTML = html;
+        if (showRefreshMessage) showNotification(`✅ ${parentComments.length} تعليق(ات)`);
+        
+    } catch(error) {
+        console.error("Erreur chargement:", error);
+        document.getElementById("comments").innerHTML = `
+            <div class="text-center text-danger py-4">
+                <i class="fas fa-wifi fa-2x mb-2"></i>
+                <p>⚠️ خطأ في الاتصال</p>
+                <button class="btn btn-sm btn-success" onclick="loadComments(true)">🔄 إعادة المحاولة</button>
+            </div>
+        `;
+        if (showRefreshMessage) showNotification("❌ خطأ في الاتصال", true);
+    }
+}
+
+function renderReplies(replies) {
+    if (!replies || replies.length === 0) {
+        return `<div class="no-replies">📭 لا توجد ردود حتى الآن</div>`;
+    }
+    
+    let html = "";
+    replies.forEach(reply => {
+        html += `
+            <div class="sub-comment">
+                <div class="comment-header">
+                    <span class="comment-name">
+                        <i class="fas fa-reply-all"></i> ${escapeHtml(reply.name)}
+                        <span class="reply-badge">رد</span>
+                    </span>
+                    <span class="comment-date">${reply.date || ""}</span>
+                </div>
+                <div class="comment-text">
+                    <span class="reply-to">
+                        <i class="fas fa-reply"></i> رداً على:
+                    </span>
+                    ${escapeHtml(reply.text)}
+                </div>
+                <div class="comment-actions">
+                    <button class="btn-like" onclick="likeComment(${reply.id}, this)">
+                        ❤️ <span class="like-count">${reply.likes || 0}</span>
+                    </button>
+                    ${isAdmin ? `<button class="btn-delete" onclick="deleteComment(${reply.id}, this)">🗑 حذف</button>` : ''}
+                </div>
+            </div>
+        `;
+    });
+    return html;
+}
+
+function toggleReplies(commentId) {
+    const container = document.getElementById(`replies-${commentId}`);
+    const icon = document.getElementById(`toggle-icon-${commentId}`);
+    const btn = document.getElementById(`toggle-btn-${commentId}`);
+    
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        if (icon) icon.className = "fas fa-chevron-down";
+        if (btn) {
+            const count = container.querySelectorAll('.sub-comment').length;
+            btn.innerHTML = `<i class="fas fa-comments"></i> الردود (${count}) <i class="fas fa-chevron-down" id="toggle-icon-${commentId}"></i>`;
+        }
+    } else {
+        container.style.display = 'none';
+        if (icon) icon.className = "fas fa-chevron-up";
+        if (btn) {
+            const count = container.querySelectorAll('.sub-comment').length;
+            btn.innerHTML = `<i class="fas fa-comments"></i> الردود (${count}) <i class="fas fa-chevron-up" id="toggle-icon-${commentId}"></i>`;
+        }
+    }
+}
+
+// ==================== ADMIN LOGIN ====================
+function adminLogin() {
+    Swal.fire({
+        title: "وضع المشرف",
+        text: "أدخل كلمة المرور",
+        input: "password",
+        showCancelButton: true,
+        confirmButtonText: "تأكيد",
+        cancelButtonText: "إلغاء"
+    }).then(res => {
+        if (res.value === "Seddik") {
+            isAdmin = true;
+            document.getElementById('adminBadge').style.display = 'inline-block';
+            Swal.fire({ icon: 'success', title: 'تم التفعيل!', timer: 2000, showConfirmButton: false });
+            loadComments(true);
+        } else if (res.value) {
+            Swal.fire({ icon: 'error', title: 'كلمة المرور غير صحيحة' });
+        }
+    });
+}
+
+// ==================== INITIALISATION ====================
+showWelcomeModal();
+loadAyah();
+loadComments(false);
+
+setInterval(() => {
+    loadComments(false);
+}, 30000);
+</script>
+</body>
+</html>
