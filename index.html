@@ -168,54 +168,6 @@ body{
     color: white;
     transform: translateY(-2px);
 }
-
-/* ========== SECTION AJOUT COMMENTAIRE (MASQUÉE PAR DÉFAUT) ========== */
-.add-comment-section {
-    display: none;
-    margin-bottom: 20px;
-    animation: slideDown 0.3s ease;
-}
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ========== SECTION COMMENTAIRES (MASQUÉE PAR DÉFAUT) ========== */
-.comments-section {
-    display: none;
-    animation: slideDown 0.3s ease;
-}
-.comments-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #e8f5e9;
-}
-.comments-header h6 {
-    margin: 0;
-    color: var(--main);
-    font-size: 16px;
-}
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #999;
-    transition: all 0.2s;
-}
-.close-btn:hover {
-    color: #dc3545;
-    transform: scale(1.1);
-}
 .comment-count-badge {
     background: var(--main);
     color: white;
@@ -225,19 +177,182 @@ body{
     margin-right: 8px;
 }
 
-/* ========== CARTE COMMENTAIRE ========== */
+/* ========== MODALE AJOUT COMMENTAIRE (CENTRÉE) ========== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+.modal-container {
+    background: white;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 85vh;
+    overflow: hidden;
+    animation: modalSlideUp 0.3s ease;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.modal-header {
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.modal-close:hover {
+    transform: scale(1.1);
+    color: #ffcccc;
+}
+.modal-body {
+    padding: 20px;
+    max-height: calc(85vh - 60px);
+    overflow-y: auto;
+}
+
+/* ========== MODALE COMMENTAIRES (PLEIN ÉCRAN) ========== */
+.fullscreen-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f4f6f9;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.fullscreen-header {
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.fullscreen-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+.fullscreen-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.fullscreen-close:hover {
+    transform: scale(1.1);
+    color: #ffcccc;
+}
+.fullscreen-body {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    height: calc(100% - 120px);
+    overflow-y: auto;
+}
+.fullscreen-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    z-index: 10;
+}
+.fullscreen-body .comment-card {
+    margin-bottom: 20px;
+}
+.fullscreen-body .loading-comments {
+    text-align: center;
+    padding: 50px;
+}
+
+/* ========== FORMULAIRE ========== */
+.form-card {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 20px;
+}
+.form-card input, .form-card textarea {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+.form-card input:focus, .form-card textarea:focus {
+    outline: none;
+    border-color: var(--main);
+    box-shadow: 0 0 0 2px rgba(25, 135, 84, 0.2);
+}
+.send-btn {
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+.send-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* ========== COMMENTAIRES ========== */
 .comment-card {
     background: white;
     border-radius: 16px;
     margin-bottom: 20px;
     overflow: hidden;
-    transition: all 0.3s ease;
     border: 2px solid var(--border-green);
     box-shadow: 0 2px 8px rgba(46, 204, 113, 0.1);
-}
-.comment-card:hover {
-    border-color: var(--border-dark);
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
 }
 .comment-main {
     padding: 15px;
@@ -280,8 +395,6 @@ body{
     padding-top: 8px;
     border-top: 1px solid #f0f0f0;
 }
-
-/* ========== RÉPONSES ========== */
 .replies-section {
     background: #f0fdf4;
     border-top: 2px solid var(--border-green);
@@ -314,13 +427,9 @@ body{
     background: white;
     border-radius: 10px;
     border-right: 3px solid var(--border-green);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .sub-comment:last-child {
     margin-bottom: 0;
-}
-.sub-comment .comment-header {
-    margin-bottom: 5px;
 }
 .sub-comment .comment-text {
     font-size: 13px;
@@ -391,65 +500,13 @@ body{
     background: #dc3545;
     color: white;
 }
-
-/* ========== FORMULAIRE ========== */
-.form-card {
-    background: #f8f9fa;
-    border-radius: 16px;
-    padding: 20px;
-    border: 1px solid #e0e0e0;
+.loading-comments {
+    text-align: center;
+    padding: 50px;
 }
-.form-card input, .form-card textarea {
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 12px;
-}
-.form-card input:focus, .form-card textarea:focus {
-    outline: none;
-    border-color: var(--main);
-    box-shadow: 0 0 0 2px rgba(25, 135, 84, 0.2);
-}
-.send-btn {
-    background: linear-gradient(135deg, var(--main), var(--dark));
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-}
-.send-btn:hover {
-    transform: translateY(-1px);
-}
-.cancel-btn {
-    background: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-}
-.cancel-btn:hover {
-    background: #5a6268;
-}
-
-/* ========== LOADING ========== */
 .loading-spinner {
     text-align: center;
     padding: 20px;
-}
-.today-badge {
-    background: var(--main);
-    color: white;
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-size: 11px;
 }
 .toast-notification {
     position: fixed;
@@ -461,7 +518,7 @@ body{
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 12px;
-    z-index: 999;
+    z-index: 10001;
     animation: fadeOut 3s forwards;
 }
 @keyframes fadeOut {
@@ -488,7 +545,7 @@ body{
     max-width: 450px;
     width: 90%;
 }
-.modal-welcome {
+.welcome-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -500,7 +557,7 @@ body{
     align-items: center;
     justify-content: center;
 }
-.modal-content-welcome {
+.welcome-content {
     background: white;
     border-radius: 24px;
     padding: 48px 40px;
@@ -508,25 +565,25 @@ body{
     width: 90%;
     text-align: center;
 }
-.modal-title-welcome {
+.welcome-title {
     font-size: 34px;
     font-weight: 800;
     color: var(--main);
     margin-bottom: 20px;
 }
-.modal-divider {
+.welcome-divider {
     width: 80px;
     height: 3px;
     background: var(--main);
     margin: 0 auto 25px auto;
 }
-.modal-text-welcome {
+.welcome-text {
     font-size: 18px;
     line-height: 1.8;
     color: #333;
     margin-bottom: 35px;
 }
-.modal-btn-welcome {
+.welcome-btn {
     background: linear-gradient(135deg, var(--main), var(--dark));
     color: white;
     border: none;
@@ -577,49 +634,54 @@ body{
 <!-- ========== BOUTONS PRINCIPAUX ========== -->
 <div class="card-box">
     <div class="main-buttons">
-        <button class="btn-main btn-add-comment" onclick="toggleAddComment()">
+        <button class="btn-main btn-add-comment" onclick="openAddCommentModal()">
             <i class="fas fa-plus-circle"></i> إضافة تعليق
         </button>
-        <button class="btn-main btn-show-comments" onclick="toggleComments()">
+        <button class="btn-main btn-show-comments" onclick="openFullscreenComments()">
             <i class="fas fa-comments"></i> عرض التعليقات
             <span id="commentsCountHeader" class="comment-count-badge">0</span>
         </button>
     </div>
 </div>
 
-<!-- ========== SECTION AJOUT COMMENTAIRE ========== -->
-<div id="addCommentSection" class="add-comment-section card-box">
-    <div class="form-card">
-        <input type="text" id="name" class="form-control" placeholder="👤 اسمك">
-        <textarea id="text" rows="4" placeholder="📝 اكتب تعليقك أو تفسيرك..."></textarea>
-        <button class="send-btn" onclick="addComment()">
-            <i class="fas fa-paper-plane"></i> إرسال التعليق
-        </button>
-        <button class="cancel-btn" onclick="toggleAddComment()">
-            <i class="fas fa-times"></i> إلغاء
-        </button>
-    </div>
-</div>
-
-<!-- ========== SECTION COMMENTAIRES ========== -->
-<div id="commentsSection" class="comments-section card-box">
-    <div class="comments-header">
-        <h6>
-            <i class="fas fa-comments"></i> تعليقات آية اليوم
-            <span id="commentCount" class="comment-count-badge">0</span>
-        </h6>
-        <button class="close-btn" onclick="toggleComments()">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <div id="comments"></div>
-    <button class="cancel-btn" style="margin-top: 15px;" onclick="toggleComments()">
-        <i class="fas fa-times"></i> إغلاق
-    </button>
-</div>
-
 <div class="footer">
     من تصميم : م.الصديق الإدريسي
+</div>
+
+<!-- ========== MODALE AJOUT COMMENTAIRE (CENTRÉE) ========== -->
+<div id="addCommentModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3><i class="fas fa-plus-circle"></i> إضافة تعليق جديد</h3>
+            <button class="modal-close" onclick="closeAddCommentModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-card">
+                <input type="text" id="modalName" class="form-control" placeholder="👤 اسمك">
+                <textarea id="modalText" rows="5" placeholder="📝 اكتب تعليقك أو تفسيرك..."></textarea>
+                <button class="send-btn" onclick="addCommentFromModal()">
+                    <i class="fas fa-paper-plane"></i> إرسال التعليق
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODALE COMMENTAIRES (PLEIN ÉCRAN AVEC FOOTER FIXE) ========== -->
+<div id="fullscreenComments" class="fullscreen-modal">
+    <div class="fullscreen-header">
+        <h2><i class="fas fa-comments"></i> تعليقات آية اليوم <span id="fullscreenCommentCount" class="comment-count-badge">0</span></h2>
+        <button class="fullscreen-close" onclick="closeFullscreenComments()">&times;</button>
+    </div>
+    <div class="fullscreen-body" id="fullscreenCommentsBody">
+        <div class="loading-comments">
+            <div class="spinner-border text-success" role="status"></div>
+            <p>جاري تحميل التعليقات...</p>
+        </div>
+    </div>
+    <div class="fullscreen-footer">
+        من تصميم : م.الصديق الإدريسي
+    </div>
 </div>
 
 <!-- ========== MODALE RÉPONSE ========== -->
@@ -639,17 +701,17 @@ body{
 </div>
 
 <!-- ========== MODALE BIENVENUE ========== -->
-<div id="welcomeModal" class="modal-welcome">
-    <div class="modal-content-welcome">
-        <div class="modal-title-welcome">مرحباً بك</div>
-        <div class="modal-divider"></div>
-        <div class="modal-text-welcome">
+<div id="welcomeModal" class="welcome-modal">
+    <div class="welcome-content">
+        <div class="welcome-title">مرحباً بك</div>
+        <div class="welcome-divider"></div>
+        <div class="welcome-text">
             نرحب بكم في تطبيق <strong>آية كل يوم</strong><br><br>
             نتمنى أن تشاركونا بتعليقاتكم وتفسيراتكم<br>
             لآية اليوم الكريمة<br><br>
             جزاكم الله خيراً
         </div>
-        <button class="modal-btn-welcome" onclick="closeWelcomeModal()">دخول</button>
+        <button class="welcome-btn" onclick="closeWelcomeModal()">دخول</button>
     </div>
 </div>
 
@@ -661,38 +723,54 @@ let isAdmin = false;
 let currentReplyParent = null;
 let currentReplyParentName = "";
 
-// ==================== FONCTIONS D'AFFICHAGE ====================
-function toggleAddComment() {
-    const section = document.getElementById('addCommentSection');
-    if (section.style.display === 'none' || section.style.display === '') {
-        section.style.display = 'block';
-        // Fermer la section des commentaires si ouverte
-        document.getElementById('commentsSection').style.display = 'none';
-    } else {
-        section.style.display = 'none';
-    }
+// ==================== FONCTIONS DES MODALES ====================
+function openAddCommentModal() {
+    document.getElementById('addCommentModal').style.display = 'flex';
+    document.getElementById('modalName').value = '';
+    document.getElementById('modalText').value = '';
 }
 
-function toggleComments() {
-    const section = document.getElementById('commentsSection');
-    if (section.style.display === 'none' || section.style.display === '') {
-        section.style.display = 'block';
-        // Fermer la section d'ajout si ouverte
-        document.getElementById('addCommentSection').style.display = 'none';
-        loadComments(true);
-    } else {
-        section.style.display = 'none';
-    }
+function closeAddCommentModal() {
+    document.getElementById('addCommentModal').style.display = 'none';
 }
 
+function openFullscreenComments() {
+    document.getElementById('fullscreenComments').style.display = 'block';
+    loadFullscreenComments();
+}
+
+function closeFullscreenComments() {
+    document.getElementById('fullscreenComments').style.display = 'none';
+}
+
+function showWelcomeModal() {
+    document.getElementById('welcomeModal').style.display = 'flex';
+}
+function closeWelcomeModal() {
+    document.getElementById('welcomeModal').style.display = 'none';
+}
+
+function openReplyModal(parentId, parentName) {
+    currentReplyParent = parentId;
+    currentReplyParentName = parentName;
+    document.getElementById('replyingToText').innerHTML = `الرد على: <strong>${escapeHtml(parentName)}</strong>`;
+    document.getElementById('replyName').value = '';
+    document.getElementById('replyText').value = '';
+    document.getElementById('replyModal').style.display = 'flex';
+}
+
+function closeReplyModal() {
+    document.getElementById('replyModal').style.display = 'none';
+    currentReplyParent = null;
+}
+
+// ==================== FONCTIONS UTILITAIRES ====================
 function formatDateTime(dateString) {
     if (!dateString) return "";
     try {
         let date = new Date(dateString);
         if (isNaN(date.getTime())) {
-            if (dateString.includes('/')) {
-                return dateString;
-            }
+            if (dateString.includes('/')) return dateString;
             return "";
         }
         const day = String(date.getDate()).padStart(2, '0');
@@ -714,24 +792,6 @@ function getCurrentFormattedDateTime() {
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     return `${day}/${month}/${year} ${hours}:${minutes}`;
-}
-
-function showWelcomeModal() {
-    document.getElementById('welcomeModal').style.display = 'flex';
-}
-function closeWelcomeModal() {
-    document.getElementById('welcomeModal').style.display = 'none';
-}
-function openReplyModal(parentId, parentName) {
-    currentReplyParent = parentId;
-    currentReplyParentName = parentName;
-    document.getElementById('replyingToText').innerHTML = `الرد على: <strong>${escapeHtml(parentName)}</strong>`;
-    document.getElementById('replyName').value = '';
-    document.getElementById('replyText').value = '';
-    document.getElementById('replyModal').style.display = 'flex';
-}
-function closeReplyModal() {
-    document.getElementById('replyModal').style.display = 'none';
 }
 
 function getTodayKey() {
@@ -775,6 +835,7 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+// ==================== NOMS DES SOURATES ====================
 const sourateNamesAr = {
     "Al-Fatiha": "الفاتحة", "Al-Baqarah": "البقرة", "Aal-E-Imran": "آل عمران",
     "An-Nisa": "النساء", "Al-Ma'idah": "المائدة", "Al-An'am": "الأنعام",
@@ -819,7 +880,6 @@ const sourateNamesAr = {
 async function loadAyah() {
     try {
         const todayKey = getTodayKey();
-        
         let ayah = localStorage.getItem(`ayah_fixed_${todayKey}`);
         
         if (ayah) {
@@ -830,7 +890,6 @@ async function loadAyah() {
         
         const sourateNumber = getDailyNumber(114, todayKey);
         const versetNumber = getDailyNumber(10, todayKey + "verse");
-        
         const res = await fetch(`https://api.alquran.cloud/v1/ayah/${sourateNumber}:${versetNumber}`);
         const data = await res.json();
         
@@ -877,10 +936,10 @@ function displayUnifiedAyah(ayah) {
     document.getElementById('dateInfo').innerHTML = `📅 ${getCurrentFormattedDateTime()}`;
 }
 
-// ==================== AJOUTER COMMENTAIRE ====================
-async function addComment() {
-    const nameInput = document.getElementById("name");
-    const textInput = document.getElementById("text");
+// ==================== AJOUTER COMMENTAIRE DEPUIS MODALE ====================
+async function addCommentFromModal() {
+    const nameInput = document.getElementById("modalName");
+    const textInput = document.getElementById("modalText");
 
     if (!textInput.value.trim()) {
         Swal.fire("خطأ", "اكتب تعليقاً", "error");
@@ -899,21 +958,24 @@ async function addComment() {
         
         nameInput.value = "";
         textInput.value = "";
-        
-        // Fermer la section d'ajout
-        document.getElementById('addCommentSection').style.display = 'none';
+        closeAddCommentModal();
         
         Swal.fire({ icon: 'success', title: 'تم الإضافة!', timer: 1500, showConfirmButton: false });
-        
-        // Mettre à jour le compteur
         updateCommentsCount();
+        
+        if (document.getElementById('fullscreenComments').style.display === 'block') {
+            loadFullscreenComments();
+        }
         
     } catch(error) {
         nameInput.value = "";
         textInput.value = "";
+        closeAddCommentModal();
         Swal.fire({ icon: 'success', title: 'تم الإرسال!', timer: 1500, showConfirmButton: false });
-        document.getElementById('addCommentSection').style.display = 'none';
         updateCommentsCount();
+        if (document.getElementById('fullscreenComments').style.display === 'block') {
+            loadFullscreenComments();
+        }
     }
 }
 
@@ -925,8 +987,8 @@ async function updateCommentsCount() {
         const allComments = allData.filter(c => convertToDateKey(c.dayKey) === todayKey);
         const parentComments = allComments.filter(c => !c.parentId || c.parentId === "" || c.parentId === null || c.parentId === 0);
         const count = parentComments.length;
-        document.getElementById('commentCount').innerHTML = count;
         document.getElementById('commentsCountHeader').innerHTML = count;
+        document.getElementById('fullscreenCommentCount').innerHTML = count;
     } catch(e) {
         console.log("Erreur compteur");
     }
@@ -952,13 +1014,9 @@ async function submitReply() {
         return;
     }
     
-    document.getElementById('replyModal').style.display = 'none';
+    closeReplyModal();
     
-    Swal.fire({ 
-        title: 'جاري الإرسال...', 
-        allowOutsideClick: false, 
-        didOpen: () => { Swal.showLoading(); }
-    });
+    Swal.fire({ title: 'جاري الإرسال...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
     
     const params = new URLSearchParams();
     params.append('action', 'add');
@@ -977,17 +1035,19 @@ async function submitReply() {
         currentReplyParent = null;
         currentReplyParentName = "";
         
-        if (document.getElementById('commentsSection').style.display === 'block') {
-            loadComments(true);
+        if (document.getElementById('fullscreenComments').style.display === 'block') {
+            loadFullscreenComments();
         }
+        updateCommentsCount();
     } catch(error) {
         Swal.close();
         Swal.fire({ icon: 'success', title: 'تم الإرسال!', timer: 1500, showConfirmButton: false });
         currentReplyParent = null;
         currentReplyParentName = "";
-        if (document.getElementById('commentsSection').style.display === 'block') {
-            loadComments(true);
+        if (document.getElementById('fullscreenComments').style.display === 'block') {
+            loadFullscreenComments();
         }
+        updateCommentsCount();
     }
 }
 
@@ -1052,8 +1112,8 @@ async function deleteComment(commentId, buttonElement) {
     try {
         await fetch(`${API_URL}?${params.toString()}`);
         showNotification("✅ تم الحذف!");
-        if (document.getElementById('commentsSection').style.display === 'block') {
-            loadComments(true);
+        if (document.getElementById('fullscreenComments').style.display === 'block') {
+            loadFullscreenComments();
         }
         updateCommentsCount();
     } catch(error) {
@@ -1061,8 +1121,16 @@ async function deleteComment(commentId, buttonElement) {
     }
 }
 
-// ==================== CHARGER LES COMMENTAIRES ====================
-async function loadComments(showRefreshMessage = false) {
+// ==================== CHARGER COMMENTAIRES (PLEIN ÉCRAN) ====================
+async function loadFullscreenComments() {
+    const container = document.getElementById('fullscreenCommentsBody');
+    container.innerHTML = `
+        <div class="loading-comments">
+            <div class="spinner-border text-success" role="status"></div>
+            <p>جاري تحميل التعليقات...</p>
+        </div>
+    `;
+    
     try {
         const todayKey = getTodayKey();
         const response = await fetch(API_URL);
@@ -1087,13 +1155,13 @@ async function loadComments(showRefreshMessage = false) {
         });
         
         const count = parentComments.length;
-        document.getElementById('commentCount').innerHTML = count;
         document.getElementById('commentsCountHeader').innerHTML = count;
+        document.getElementById('fullscreenCommentCount').innerHTML = count;
         
         if (parentComments.length === 0) {
-            document.getElementById("comments").innerHTML = `
-                <div class="text-center text-muted py-4">
-                    <i class="fas fa-comment-dots fa-2x mb-2"></i>
+            container.innerHTML = `
+                <div class="text-center text-muted py-5">
+                    <i class="fas fa-comment-dots fa-3x mb-3"></i>
                     <p>لا توجد تعليقات لهذا اليوم</p>
                     <small>كن أول من يعلق!</small>
                 </div>
@@ -1131,12 +1199,12 @@ async function loadComments(showRefreshMessage = false) {
                     ${replyCount > 0 ? `
                         <div class="replies-section">
                             <div class="replies-header">
-                                <button class="toggle-replies-btn" onclick="toggleReplies(this, ${comment.id})">
+                                <button class="toggle-replies-btn" onclick="toggleRepliesFullscreen(this, ${comment.id})">
                                     <i class="fas fa-comments"></i> الردود (${replyCount}) ▼
                                 </button>
                             </div>
-                            <div id="replies-${comment.id}" class="replies-container" style="display: none;">
-                                ${renderReplies(commentReplies, parentNames)}
+                            <div id="fullscreen-replies-${comment.id}" class="replies-container" style="display: none;">
+                                ${renderRepliesFullscreen(commentReplies, parentNames)}
                             </div>
                         </div>
                     ` : ''}
@@ -1144,22 +1212,21 @@ async function loadComments(showRefreshMessage = false) {
             `;
         });
         
-        document.getElementById("comments").innerHTML = html;
-        if (showRefreshMessage) showNotification(`✅ ${parentComments.length} تعليق(ات)`);
+        container.innerHTML = html;
         
     } catch(error) {
         console.error("Erreur chargement:", error);
-        document.getElementById("comments").innerHTML = `
-            <div class="text-center text-danger py-4">
-                <i class="fas fa-wifi fa-2x mb-2"></i>
+        container.innerHTML = `
+            <div class="text-center text-danger py-5">
+                <i class="fas fa-wifi fa-3x mb-3"></i>
                 <p>⚠️ خطأ في الاتصال</p>
-                <button class="btn btn-sm btn-success" onclick="loadComments(true)">🔄 إعادة المحاولة</button>
+                <button class="btn btn-sm btn-success" onclick="loadFullscreenComments()">🔄 إعادة المحاولة</button>
             </div>
         `;
     }
 }
 
-function renderReplies(replies, parentNames) {
+function renderRepliesFullscreen(replies, parentNames) {
     if (!replies || replies.length === 0) return '';
     
     let html = "";
@@ -1195,8 +1262,8 @@ function renderReplies(replies, parentNames) {
     return html;
 }
 
-function toggleReplies(button, commentId) {
-    const container = document.getElementById(`replies-${commentId}`);
+function toggleRepliesFullscreen(button, commentId) {
+    const container = document.getElementById(`fullscreen-replies-${commentId}`);
     if (container.style.display === 'none') {
         container.style.display = 'block';
         button.innerHTML = `<i class="fas fa-comments"></i> الردود (${container.querySelectorAll('.sub-comment').length}) ▲`;
@@ -1219,8 +1286,8 @@ function adminLogin() {
         if (res.value === "Seddik") {
             isAdmin = true;
             Swal.fire({ icon: 'success', title: 'تم التفعيل!', timer: 2000, showConfirmButton: false });
-            if (document.getElementById('commentsSection').style.display === 'block') {
-                loadComments(true);
+            if (document.getElementById('fullscreenComments').style.display === 'block') {
+                loadFullscreenComments();
             }
         } else if (res.value) {
             Swal.fire({ icon: 'error', title: 'كلمة المرور غير صحيحة' });
