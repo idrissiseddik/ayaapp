@@ -78,6 +78,69 @@ body{
     box-shadow:0 3px 12px rgba(0,0,0,0.08);
 }
 
+/* ========== CARTE AYAH UNIFIÉE ========== */
+.ayah-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 3px solid var(--border-green);
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
+}
+.verse-banner {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
+    border-bottom: 2px solid var(--border-green);
+    padding: 15px 20px;
+    text-align: center;
+}
+.verse-banner-text {
+    font-size: 18px;
+    color: #2c3e2f;
+    line-height: 1.8;
+}
+.verse-banner-text strong {
+    color: var(--main);
+    font-size: 20px;
+    font-weight: bold;
+}
+.ayah-content {
+    padding: 20px;
+    text-align: center;
+}
+.soura-name-ar {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--main);
+    margin-bottom: 5px;
+}
+.soura-name-fr {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+.aya-text {
+    font-size: 24px;
+    text-align: center;
+    line-height: 1.8;
+    margin: 20px 0;
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+}
+.sadaq-allah {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--main);
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+}
+.date-info {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    margin-top: 10px;
+}
+
 /* ========== CARTE COMMENTAIRE AVEC BORDURE VERTE ========== */
 .comment-card {
     background: white;
@@ -85,7 +148,6 @@ body{
     margin-bottom: 25px;
     overflow: hidden;
     transition: all 0.3s ease;
-    /* Bordure verte visible */
     border: 3px solid var(--border-green);
     box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
 }
@@ -123,10 +185,12 @@ body{
 }
 .comment-date {
     font-size: 11px;
-    color: #adb5bd;
+    color: #6c757d;
     background: #f8f9fa;
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: 20px;
+    direction: ltr;
+    display: inline-block;
 }
 .comment-text {
     margin: 15px 0;
@@ -270,17 +334,23 @@ body{
     border: 1px solid var(--border-green);
 }
 .reply-to {
-    font-size: 11px;
-    color: #6c757d;
+    font-size: 12px;
+    color: var(--main);
     margin-left: 8px;
-    background: #f8f9fa;
-    padding: 2px 8px;
-    border-radius: 15px;
+    background: #e8f5e9;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: bold;
 }
 .reply-to i {
     color: var(--main);
     font-size: 11px;
     margin-left: 5px;
+}
+.reply-to-name {
+    color: var(--dark);
+    font-weight: bold;
 }
 .no-replies {
     text-align: center;
@@ -292,53 +362,7 @@ body{
     border-radius: 10px;
 }
 
-/* ========== BADGE DE COMPTEUR ========== */
-.reply-count-badge {
-    background: var(--main);
-    color: white;
-    font-size: 11px;
-    padding: 2px 10px;
-    border-radius: 20px;
-    margin-right: 8px;
-}
-
-/* ========== AUTRES STYLES ========== */
-input, textarea{
-    border-radius:10px !important;
-}
-.soura-info {
-    text-align: center;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #e0e0e0;
-}
-.soura-name-ar {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--main);
-}
-.aya-text {
-    font-size: 24px;
-    text-align: right;
-    line-height: 1.8;
-    margin: 20px 0;
-    font-family: 'Traditional Arabic', serif;
-}
-.sadaq-allah {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--main);
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px dashed #ddd;
-}
-.date-info {
-    text-align: center;
-    font-size: 12px;
-    color: #888;
-    margin-top: 10px;
-}
+/* ========== LOADING ========== */
 .loading-spinner {
     text-align: center;
     padding: 20px;
@@ -473,7 +497,23 @@ input, textarea{
     </div>
 </div>
 
-<div class="card-box" id="ayahBox">
+<!-- ========== CARTE AYAH UNIFIÉE (BANNIÈRE + AYAH DANS LA MÊME CARTE) ========== -->
+<div class="ayah-card" id="ayahCard" style="display: none;">
+    <div class="verse-banner">
+        <div class="verse-banner-text">
+            📖 <strong>يقول الله تعالى في سورة <span id="souraName"></span> الآية <span id="ayaNumber"></span>:</strong>
+        </div>
+    </div>
+    <div class="ayah-content">
+        <div class="soura-name-ar" id="souraNameAr"></div>
+        <div class="soura-name-fr" id="souraNameFr"></div>
+        <div class="aya-text" id="ayaText"></div>
+        <div class="sadaq-allah">﴿ صدق الله العظيم ﴾</div>
+        <div class="date-info" id="dateInfo"></div>
+    </div>
+</div>
+
+<div id="loadingAyah" class="card-box">
     <div class="loading-spinner">
         <div class="spinner-border text-success" role="status"></div>
         <p>جاري تحميل الآية...</p>
@@ -540,12 +580,47 @@ input, textarea{
 
 <script>
 // ==================== CONFIGURATION ====================
-// ⚠️ IMPORTANT: Remplacez cette URL par celle de votre déploiement Apps Script
 const API_URL = "https://script.google.com/macros/s/AKfycbyV11qMDxMJYeLfzjTD1qsbZuP2_9-7mzIzqvFG5wCr1UFc8qzVDMVASP3WihKfAiz7rQ/exec";
 
 let isAdmin = false;
 let currentReplyParent = null;
 let currentReplyParentName = "";
+
+// Stocker les informations de la sourate et de l'ayah
+let currentSouraName = "";
+let currentAyahNumber = "";
+
+// ==================== FONCTION DE CONVERSION DE DATE ET HEURE ====================
+function formatDateTime(dateString) {
+    if (!dateString) return "";
+    try {
+        let date = new Date(dateString);
+        if (isNaN(date.getTime())) {
+            if (dateString.includes('/')) {
+                return dateString;
+            }
+            return "";
+        }
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    } catch(e) {
+        return dateString;
+    }
+}
+
+function getCurrentFormattedDateTime() {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
 
 // ==================== FONCTIONS MODALES ====================
 function showWelcomeModal() {
@@ -608,7 +683,7 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-document.getElementById('todayBadge').innerHTML = getTodayKey();
+document.getElementById('todayBadge').innerHTML = getCurrentFormattedDateTime();
 
 // ==================== NOMS DES SOURATES ====================
 const sourateNamesAr = {
@@ -655,44 +730,71 @@ const sourateNamesAr = {
 async function loadAyah() {
     try {
         const todayKey = getTodayKey();
+        
+        // Vérifier si l'ayah est déjà en cache pour aujourd'hui
+        let ayah = localStorage.getItem(`ayah_fixed_${todayKey}`);
+        
+        if (ayah) {
+            ayah = JSON.parse(ayah);
+            displayUnifiedAyah(ayah);
+            return;
+        }
+        
         const sourateNumber = getDailyNumber(114, todayKey);
         const versetNumber = getDailyNumber(10, todayKey + "verse");
+        
         const res = await fetch(`https://api.alquran.cloud/v1/ayah/${sourateNumber}:${versetNumber}`);
         const data = await res.json();
-        let ayah;
+        
+        let ayahData;
         if (data.data) {
-            ayah = {
-                sourateNameFr: data.data.surah.englishName,
-                sourateNameAr: sourateNamesAr[data.data.surah.englishName] || data.data.surah.name,
+            const sourateNameFr = data.data.surah.englishName;
+            const sourateNameAr = sourateNamesAr[sourateNameFr] || data.data.surah.name;
+            ayahData = {
+                sourateNameFr: sourateNameFr,
+                sourateNameAr: sourateNameAr,
                 ayahNumber: data.data.numberInSurah,
                 ayahText: data.data.text
             };
+            currentSouraName = sourateNameAr;
+            currentAyahNumber = ayahData.ayahNumber;
         } else {
             const fallbackRes = await fetch("https://api.alquran.cloud/v1/ayah/random");
             const fallbackData = await fallbackRes.json();
-            ayah = {
-                sourateNameFr: fallbackData.data.surah.englishName,
-                sourateNameAr: sourateNamesAr[fallbackData.data.surah.englishName] || fallbackData.data.surah.name,
+            const sourateNameFr = fallbackData.data.surah.englishName;
+            const sourateNameAr = sourateNamesAr[sourateNameFr] || fallbackData.data.surah.name;
+            ayahData = {
+                sourateNameFr: sourateNameFr,
+                sourateNameAr: sourateNameAr,
                 ayahNumber: fallbackData.data.numberInSurah,
                 ayahText: fallbackData.data.text
             };
+            currentSouraName = sourateNameAr;
+            currentAyahNumber = ayahData.ayahNumber;
         }
-        displayAyah(ayah);
+        
+        localStorage.setItem(`ayah_fixed_${todayKey}`, JSON.stringify(ayahData));
+        displayUnifiedAyah(ayahData);
+        
     } catch(error) {
-        document.getElementById("ayahBox").innerHTML = `<div class="text-center text-danger">خطأ في تحميل الآية</div>`;
+        console.error("Erreur chargement aya:", error);
+        document.getElementById("loadingAyah").innerHTML = `<div class="text-center text-danger">خطأ في تحميل الآية</div>`;
     }
 }
 
-function displayAyah(ayah) {
-    document.getElementById("ayahBox").innerHTML = `
-        <div class="soura-info">
-            <div class="soura-name-ar">${ayah.sourateNameAr}</div>
-            <div class="soura-name-fr">${ayah.sourateNameFr} - ${ayah.ayahNumber}</div>
-        </div>
-        <div class="aya-text">${ayah.ayahText}</div>
-        <div class="sadaq-allah">﴿ صدق الله العظيم ﴾</div>
-        <div class="date-info">📅 ${new Date().toLocaleDateString('ar-EG')}</div>
-    `;
+function displayUnifiedAyah(ayah) {
+    // Cacher le loader et afficher la carte
+    document.getElementById('loadingAyah').style.display = 'none';
+    const ayahCard = document.getElementById('ayahCard');
+    ayahCard.style.display = 'block';
+    
+    // Remplir les éléments
+    document.getElementById('souraName').innerHTML = ayah.sourateNameAr;
+    document.getElementById('ayaNumber').innerHTML = ayah.ayahNumber;
+    document.getElementById('souraNameAr').innerHTML = ayah.sourateNameAr;
+    document.getElementById('souraNameFr').innerHTML = `${ayah.sourateNameFr} - ${ayah.ayahNumber}`;
+    document.getElementById('ayaText').innerHTML = ayah.ayahText;
+    document.getElementById('dateInfo').innerHTML = `📅 ${getCurrentFormattedDateTime()}`;
 }
 
 // ==================== AJOUTER COMMENTAIRE PRINCIPAL ====================
@@ -747,6 +849,7 @@ async function submitReply() {
     }
     
     const parentId = currentReplyParent;
+    const parentName = currentReplyParentName;
     
     if (!parentId) {
         Swal.fire('خطأ', 'معرف التعليق الأصلي مفقود', 'error');
@@ -767,6 +870,7 @@ async function submitReply() {
     params.append('text', text);
     params.append('dayKey', getTodayKey());
     params.append('parentId', parentId);
+    params.append('parentName', parentName);
     params.append('type', 'reply');
     
     try {
@@ -868,6 +972,11 @@ async function loadComments(showRefreshMessage = false) {
         const parentComments = allComments.filter(c => !c.parentId || c.parentId === "" || c.parentId === null || c.parentId === 0);
         const replies = allComments.filter(c => c.parentId && c.parentId !== "" && c.parentId !== null && c.parentId !== 0);
         
+        const parentNames = {};
+        parentComments.forEach(comment => {
+            parentNames[comment.id] = comment.name;
+        });
+        
         const repliesByParent = {};
         replies.forEach(reply => {
             const parentId = String(reply.parentId);
@@ -894,6 +1003,7 @@ async function loadComments(showRefreshMessage = false) {
             const commentId = String(comment.id);
             const commentReplies = repliesByParent[commentId] || [];
             const replyCount = commentReplies.length;
+            const commentDateTime = formatDateTime(comment.date);
             
             html += `
                 <div class="comment-card" data-id="${comment.id}">
@@ -902,7 +1012,7 @@ async function loadComments(showRefreshMessage = false) {
                             <span class="comment-name">
                                 <i class="fas fa-user-circle"></i> ${escapeHtml(comment.name)}
                             </span>
-                            <span class="comment-date">${comment.date || ""}</span>
+                            <span class="comment-date">📅 ${commentDateTime}</span>
                         </div>
                         <div class="comment-text">${escapeHtml(comment.text)}</div>
                         <div class="comment-actions">
@@ -923,7 +1033,7 @@ async function loadComments(showRefreshMessage = false) {
                             </button>
                         </div>
                         <div id="replies-${comment.id}" class="replies-container" style="display: block;">
-                            ${renderReplies(commentReplies)}
+                            ${renderReplies(commentReplies, parentNames)}
                         </div>
                     </div>
                 </div>
@@ -946,13 +1056,16 @@ async function loadComments(showRefreshMessage = false) {
     }
 }
 
-function renderReplies(replies) {
+function renderReplies(replies, parentNames) {
     if (!replies || replies.length === 0) {
         return `<div class="no-replies">📭 لا توجد ردود حتى الآن</div>`;
     }
     
     let html = "";
     replies.forEach(reply => {
+        const replyDateTime = formatDateTime(reply.date);
+        const repliedToName = parentNames[reply.parentId] || "التعليق الأصلي";
+        
         html += `
             <div class="sub-comment">
                 <div class="comment-header">
@@ -960,12 +1073,13 @@ function renderReplies(replies) {
                         <i class="fas fa-reply-all"></i> ${escapeHtml(reply.name)}
                         <span class="reply-badge">رد</span>
                     </span>
-                    <span class="comment-date">${reply.date || ""}</span>
+                    <span class="comment-date">📅 ${replyDateTime}</span>
                 </div>
                 <div class="comment-text">
                     <span class="reply-to">
-                        <i class="fas fa-reply"></i> رداً على:
+                        <i class="fas fa-reply"></i> رداً على: <span class="reply-to-name">${escapeHtml(repliedToName)}</span>
                     </span>
+                    <br><br>
                     ${escapeHtml(reply.text)}
                 </div>
                 <div class="comment-actions">
