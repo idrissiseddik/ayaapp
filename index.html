@@ -88,35 +88,23 @@ body{
     box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
 }
 .verse-banner {
-    background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
-    border-bottom: 2px solid var(--border-green);
+    background: linear-gradient(135deg, var(--main), var(--dark));
     padding: 15px 20px;
     text-align: center;
 }
 .verse-banner-text {
     font-size: 18px;
-    color: #2c3e2f;
+    color: white;
     line-height: 1.8;
 }
 .verse-banner-text strong {
-    color: var(--main);
+    color: white;
     font-size: 20px;
     font-weight: bold;
 }
 .ayah-content {
-    padding: 20px;
+    padding: 25px 20px;
     text-align: center;
-}
-.soura-name-ar {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--main);
-    margin-bottom: 5px;
-}
-.soura-name-fr {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 15px;
 }
 .aya-text {
     font-size: 24px;
@@ -141,212 +129,222 @@ body{
     margin-top: 10px;
 }
 
-/* ========== CARTE COMMENTAIRE AVEC BORDURE VERTE ========== */
-.comment-card {
-    background: white;
-    border-radius: 16px;
-    margin-bottom: 25px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border: 3px solid var(--border-green);
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
+/* ========== BOUTONS PRINCIPAUX ========== */
+.main-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: center;
 }
-.comment-card:hover {
-    border-color: var(--border-dark);
-    box-shadow: 0 6px 18px rgba(46, 204, 113, 0.25);
+.btn-main {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.btn-add-comment {
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
+}
+.btn-add-comment:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
+}
+.btn-show-comments {
+    background: white;
+    color: var(--main);
+    border: 2px solid var(--main);
+}
+.btn-show-comments:hover {
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
     transform: translateY(-2px);
 }
 
-/* ========== EN-TÊTE DU COMMENTAIRE ========== */
-.comment-main {
-    padding: 18px;
-    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+/* ========== SECTION AJOUT COMMENTAIRE (MASQUÉE PAR DÉFAUT) ========== */
+.add-comment-section {
+    display: none;
+    margin-bottom: 20px;
+    animation: slideDown 0.3s ease;
 }
-.comment-main:hover {
-    background: #fefefe;
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== SECTION COMMENTAIRES (MASQUÉE PAR DÉFAUT) ========== */
+.comments-section {
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e8f5e9;
+}
+.comments-header h6 {
+    margin: 0;
+    color: var(--main);
+    font-size: 16px;
+}
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+    transition: all 0.2s;
+}
+.close-btn:hover {
+    color: #dc3545;
+    transform: scale(1.1);
+}
+.comment-count-badge {
+    background: var(--main);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+/* ========== CARTE COMMENTAIRE ========== */
+.comment-card {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid var(--border-green);
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.1);
+}
+.comment-card:hover {
+    border-color: var(--border-dark);
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+}
+.comment-main {
+    padding: 15px;
 }
 .comment-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
-    border-bottom: 2px solid #e8f5e9;
-    padding-bottom: 10px;
+    border-bottom: 1px solid #e8f5e9;
+    padding-bottom: 8px;
 }
 .comment-name {
     font-weight: bold;
     color: var(--main);
-    font-size: 16px;
+    font-size: 15px;
 }
 .comment-name i {
     margin-left: 8px;
-    color: var(--main);
 }
 .comment-date {
     font-size: 11px;
     color: #6c757d;
     background: #f8f9fa;
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 20px;
-    direction: ltr;
-    display: inline-block;
 }
 .comment-text {
-    margin: 15px 0;
-    line-height: 1.8;
+    margin: 12px 0;
+    line-height: 1.7;
     color: #212529;
     text-align: right;
-    font-size: 16px;
-    padding: 8px 0;
+    font-size: 15px;
 }
 .comment-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid #e8f5e9;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
 }
 
-/* ========== BOUTONS ========== */
-.reply-btn {
-    background: none;
-    border: 2px solid var(--main);
-    color: var(--main);
-    font-size: 12px;
-    cursor: pointer;
-    padding: 6px 16px;
-    border-radius: 25px;
-    transition: all 0.2s;
-    margin-right: 8px;
-    font-weight: bold;
-}
-.reply-btn:hover {
-    background: var(--main);
-    color: white;
-    transform: scale(1.02);
-}
-.btn-like {
-    background: none;
-    border: 2px solid #dc3545;
-    color: #dc3545;
-    padding: 6px 16px;
-    border-radius: 25px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-weight: bold;
-}
-.btn-like:hover {
-    background: #dc3545;
-    color: white;
-    transform: scale(1.02);
-}
-.btn-delete {
-    background: none;
-    border: 2px solid #dc3545;
-    color: #dc3545;
-    padding: 6px 16px;
-    border-radius: 25px;
-    font-size: 12px;
-    margin-right: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-weight: bold;
-}
-.btn-delete:hover {
-    background: #dc3545;
-    color: white;
-    transform: scale(1.02);
-}
-
-/* ========== SECTION DES RÉPONSES ========== */
+/* ========== RÉPONSES ========== */
 .replies-section {
     background: #f0fdf4;
-    border-top: 3px solid var(--border-green);
-    padding: 15px 18px;
+    border-top: 2px solid var(--border-green);
+    padding: 12px 15px;
 }
 .replies-header {
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 2px dashed #c8e6d9;
+    margin-bottom: 10px;
 }
 .toggle-replies-btn {
-    background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
-    border: 1px solid var(--border-green);
-    color: var(--dark);
-    font-size: 13px;
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 12px;
     cursor: pointer;
-    padding: 6px 16px;
-    border-radius: 25px;
-    transition: all 0.2s;
-    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px;
 }
 .toggle-replies-btn:hover {
-    background: linear-gradient(135deg, var(--main), var(--dark));
-    color: white;
-    border-color: var(--main);
+    background: #e9ecef;
+    color: var(--main);
 }
 .replies-container {
-    margin-top: 12px;
+    margin-top: 10px;
 }
-
-/* ========== SOUS-COMMENTAIRE (RÉPONSE) ========== */
 .sub-comment {
-    margin-right: 45px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding: 15px;
+    margin-right: 40px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
     background: white;
-    border-radius: 12px;
-    border-right: 5px solid var(--border-green);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    transition: all 0.2s ease;
+    border-radius: 10px;
+    border-right: 3px solid var(--border-green);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .sub-comment:last-child {
     margin-bottom: 0;
 }
-.sub-comment:hover {
-    background: #ffffff;
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
-    transform: translateX(-3px);
-    border-right-width: 6px;
-}
 .sub-comment .comment-header {
-    border-bottom: 1px solid #e8f5e9;
-    padding-bottom: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 .sub-comment .comment-text {
-    font-size: 14px;
-    margin: 10px 0;
-    line-height: 1.7;
+    font-size: 13px;
+    margin: 8px 0;
 }
 .reply-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #e8f5e9, #c8e6d9);
+    background: #e8f5e9;
     color: var(--dark);
     font-size: 10px;
-    padding: 3px 12px;
+    padding: 2px 8px;
     border-radius: 20px;
-    margin-right: 10px;
-    font-weight: bold;
-    border: 1px solid var(--border-green);
+    margin-right: 8px;
 }
 .reply-to {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--main);
-    margin-left: 8px;
     background: #e8f5e9;
-    padding: 3px 10px;
-    border-radius: 20px;
+    padding: 2px 8px;
+    border-radius: 15px;
     display: inline-block;
-    font-weight: bold;
 }
 .reply-to i {
-    color: var(--main);
-    font-size: 11px;
-    margin-left: 5px;
+    margin-left: 4px;
 }
 .reply-to-name {
     color: var(--dark);
@@ -355,11 +353,90 @@ body{
 .no-replies {
     text-align: center;
     color: #adb5bd;
-    font-size: 13px;
-    padding: 20px;
+    font-size: 12px;
+    padding: 15px;
     font-style: italic;
+}
+.btn-like, .reply-btn, .btn-delete {
+    background: none;
+    border: 1px solid;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+.btn-like {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+.btn-like:hover {
+    background: #dc3545;
+    color: white;
+}
+.reply-btn {
+    border-color: var(--main);
+    color: var(--main);
+}
+.reply-btn:hover {
+    background: var(--main);
+    color: white;
+}
+.btn-delete {
+    border-color: #dc3545;
+    color: #dc3545;
+    margin-right: 5px;
+}
+.btn-delete:hover {
+    background: #dc3545;
+    color: white;
+}
+
+/* ========== FORMULAIRE ========== */
+.form-card {
     background: #f8f9fa;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+}
+.form-card input, .form-card textarea {
     border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+.form-card input:focus, .form-card textarea:focus {
+    outline: none;
+    border-color: var(--main);
+    box-shadow: 0 0 0 2px rgba(25, 135, 84, 0.2);
+}
+.send-btn {
+    background: linear-gradient(135deg, var(--main), var(--dark));
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+.send-btn:hover {
+    transform: translateY(-1px);
+}
+.cancel-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+.cancel-btn:hover {
+    background: #5a6268;
 }
 
 /* ========== LOADING ========== */
@@ -373,27 +450,6 @@ body{
     padding: 2px 10px;
     border-radius: 20px;
     font-size: 11px;
-    margin-right: 8px;
-}
-.refresh-btn {
-    background: none;
-    border: none;
-    color: var(--main);
-    cursor: pointer;
-    padding: 5px;
-}
-.comment-count {
-    font-size: 12px;
-    color: #666;
-    margin-right: 8px;
-}
-.admin-badge {
-    background: #ffc107;
-    color: #000;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 10px;
-    margin-left: 10px;
 }
 .toast-notification {
     position: fixed;
@@ -488,7 +544,7 @@ body{
     <div class="header-left"></div>
     <div>
         <div class="header-title">📖 آية كل يوم</div>
-        <div class="header-sub">أضف تعليقك على الآية الكريمة</div>
+        <div class="header-sub">تدبر آية اليوم وشارك تعليقك</div>
     </div>
     <div class="header-right">
         <button class="admin-header-btn" onclick="adminLogin()">
@@ -497,7 +553,7 @@ body{
     </div>
 </div>
 
-<!-- ========== CARTE AYAH UNIFIÉE (BANNIÈRE + AYAH DANS LA MÊME CARTE) ========== -->
+<!-- ========== CARTE AYAH ========== -->
 <div class="ayah-card" id="ayahCard" style="display: none;">
     <div class="verse-banner">
         <div class="verse-banner-text">
@@ -505,8 +561,6 @@ body{
         </div>
     </div>
     <div class="ayah-content">
-        <div class="soura-name-ar" id="souraNameAr"></div>
-        <div class="soura-name-fr" id="souraNameFr"></div>
         <div class="aya-text" id="ayaText"></div>
         <div class="sadaq-allah">﴿ صدق الله العظيم ﴾</div>
         <div class="date-info" id="dateInfo"></div>
@@ -520,31 +574,55 @@ body{
     </div>
 </div>
 
+<!-- ========== BOUTONS PRINCIPAUX ========== -->
 <div class="card-box">
-    <input id="name" class="form-control mb-2" placeholder="👤 اسمك">
-    <textarea id="text" class="form-control" rows="3" placeholder="📝 اكتب تعليقك..."></textarea>
-    <button id="sendBtn" class="btn btn-success w-100 mt-2" onclick="addComment()">
-        <i class="fa fa-paper-plane"></i> إرسال التعليق
-    </button>
+    <div class="main-buttons">
+        <button class="btn-main btn-add-comment" onclick="toggleAddComment()">
+            <i class="fas fa-plus-circle"></i> إضافة تعليق
+        </button>
+        <button class="btn-main btn-show-comments" onclick="toggleComments()">
+            <i class="fas fa-comments"></i> عرض التعليقات
+            <span id="commentsCountHeader" class="comment-count-badge">0</span>
+        </button>
+    </div>
 </div>
 
-<div class="card-box">
-    <h6>
-        💬 تعليقات آية اليوم
-        <button class="refresh-btn" onclick="loadComments(true)">
-            <i class="fas fa-sync-alt"></i>
+<!-- ========== SECTION AJOUT COMMENTAIRE ========== -->
+<div id="addCommentSection" class="add-comment-section card-box">
+    <div class="form-card">
+        <input type="text" id="name" class="form-control" placeholder="👤 اسمك">
+        <textarea id="text" rows="4" placeholder="📝 اكتب تعليقك أو تفسيرك..."></textarea>
+        <button class="send-btn" onclick="addComment()">
+            <i class="fas fa-paper-plane"></i> إرسال التعليق
         </button>
-        <span class="today-badge" id="todayBadge"></span>
-        <span class="comment-count" id="commentCount"></span>
-        <span id="adminBadge" class="admin-badge" style="display:none;">👑 المشرف</span>
-    </h6>
+        <button class="cancel-btn" onclick="toggleAddComment()">
+            <i class="fas fa-times"></i> إلغاء
+        </button>
+    </div>
+</div>
+
+<!-- ========== SECTION COMMENTAIRES ========== -->
+<div id="commentsSection" class="comments-section card-box">
+    <div class="comments-header">
+        <h6>
+            <i class="fas fa-comments"></i> تعليقات آية اليوم
+            <span id="commentCount" class="comment-count-badge">0</span>
+        </h6>
+        <button class="close-btn" onclick="toggleComments()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
     <div id="comments"></div>
+    <button class="cancel-btn" style="margin-top: 15px;" onclick="toggleComments()">
+        <i class="fas fa-times"></i> إغلاق
+    </button>
 </div>
 
 <div class="footer">
     من تصميم : م.الصديق الإدريسي
 </div>
 
+<!-- ========== MODALE RÉPONSE ========== -->
 <div id="replyModal" class="reply-modal">
     <div class="reply-modal-content">
         <h5 style="color: var(--main); text-align: center;">
@@ -552,18 +630,15 @@ body{
         </h5>
         <div style="background:#f0f0f0; padding:10px; border-radius:10px; margin-bottom:15px; font-size:13px; color:#666;" id="replyingToText"></div>
         <input type="text" id="replyName" class="form-control mb-2" placeholder="👤 اسمك">
-        <textarea id="replyText" class="form-control" rows="3" placeholder="✏️ اكتب ردك..."></textarea>
+        <textarea id="replyText" rows="3" class="form-control" placeholder="✏️ اكتب ردك..."></textarea>
         <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button class="btn btn-success" style="flex:1" onclick="submitReply()">
-                <i class="fas fa-paper-plane"></i> إرسال الرد
-            </button>
-            <button class="btn btn-secondary" style="flex:1" onclick="closeReplyModal()">
-                <i class="fas fa-times"></i> إلغاء
-            </button>
+            <button class="btn btn-success" style="flex:1" onclick="submitReply()">إرسال الرد</button>
+            <button class="btn btn-secondary" style="flex:1" onclick="closeReplyModal()">إلغاء</button>
         </div>
     </div>
 </div>
 
+<!-- ========== MODALE BIENVENUE ========== -->
 <div id="welcomeModal" class="modal-welcome">
     <div class="modal-content-welcome">
         <div class="modal-title-welcome">مرحباً بك</div>
@@ -586,11 +661,30 @@ let isAdmin = false;
 let currentReplyParent = null;
 let currentReplyParentName = "";
 
-// Stocker les informations de la sourate et de l'ayah
-let currentSouraName = "";
-let currentAyahNumber = "";
+// ==================== FONCTIONS D'AFFICHAGE ====================
+function toggleAddComment() {
+    const section = document.getElementById('addCommentSection');
+    if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'block';
+        // Fermer la section des commentaires si ouverte
+        document.getElementById('commentsSection').style.display = 'none';
+    } else {
+        section.style.display = 'none';
+    }
+}
 
-// ==================== FONCTION DE CONVERSION DE DATE ET HEURE ====================
+function toggleComments() {
+    const section = document.getElementById('commentsSection');
+    if (section.style.display === 'none' || section.style.display === '') {
+        section.style.display = 'block';
+        // Fermer la section d'ajout si ouverte
+        document.getElementById('addCommentSection').style.display = 'none';
+        loadComments(true);
+    } else {
+        section.style.display = 'none';
+    }
+}
+
 function formatDateTime(dateString) {
     if (!dateString) return "";
     try {
@@ -622,7 +716,6 @@ function getCurrentFormattedDateTime() {
     return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
-// ==================== FONCTIONS MODALES ====================
 function showWelcomeModal() {
     document.getElementById('welcomeModal').style.display = 'flex';
 }
@@ -641,7 +734,6 @@ function closeReplyModal() {
     document.getElementById('replyModal').style.display = 'none';
 }
 
-// ==================== FONCTIONS UTILITAIRES ====================
 function getTodayKey() {
     const today = new Date();
     return `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
@@ -683,9 +775,6 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-document.getElementById('todayBadge').innerHTML = getCurrentFormattedDateTime();
-
-// ==================== NOMS DES SOURATES ====================
 const sourateNamesAr = {
     "Al-Fatiha": "الفاتحة", "Al-Baqarah": "البقرة", "Aal-E-Imran": "آل عمران",
     "An-Nisa": "النساء", "Al-Ma'idah": "المائدة", "Al-An'am": "الأنعام",
@@ -731,7 +820,6 @@ async function loadAyah() {
     try {
         const todayKey = getTodayKey();
         
-        // Vérifier si l'ayah est déjà en cache pour aujourd'hui
         let ayah = localStorage.getItem(`ayah_fixed_${todayKey}`);
         
         if (ayah) {
@@ -756,8 +844,6 @@ async function loadAyah() {
                 ayahNumber: data.data.numberInSurah,
                 ayahText: data.data.text
             };
-            currentSouraName = sourateNameAr;
-            currentAyahNumber = ayahData.ayahNumber;
         } else {
             const fallbackRes = await fetch("https://api.alquran.cloud/v1/ayah/random");
             const fallbackData = await fallbackRes.json();
@@ -769,8 +855,6 @@ async function loadAyah() {
                 ayahNumber: fallbackData.data.numberInSurah,
                 ayahText: fallbackData.data.text
             };
-            currentSouraName = sourateNameAr;
-            currentAyahNumber = ayahData.ayahNumber;
         }
         
         localStorage.setItem(`ayah_fixed_${todayKey}`, JSON.stringify(ayahData));
@@ -783,33 +867,25 @@ async function loadAyah() {
 }
 
 function displayUnifiedAyah(ayah) {
-    // Cacher le loader et afficher la carte
     document.getElementById('loadingAyah').style.display = 'none';
     const ayahCard = document.getElementById('ayahCard');
     ayahCard.style.display = 'block';
     
-    // Remplir les éléments
     document.getElementById('souraName').innerHTML = ayah.sourateNameAr;
     document.getElementById('ayaNumber').innerHTML = ayah.ayahNumber;
-    document.getElementById('souraNameAr').innerHTML = ayah.sourateNameAr;
-    document.getElementById('souraNameFr').innerHTML = `${ayah.sourateNameFr} - ${ayah.ayahNumber}`;
     document.getElementById('ayaText').innerHTML = ayah.ayahText;
     document.getElementById('dateInfo').innerHTML = `📅 ${getCurrentFormattedDateTime()}`;
 }
 
-// ==================== AJOUTER COMMENTAIRE PRINCIPAL ====================
+// ==================== AJOUTER COMMENTAIRE ====================
 async function addComment() {
     const nameInput = document.getElementById("name");
     const textInput = document.getElementById("text");
-    const btn = document.getElementById("sendBtn");
 
     if (!textInput.value.trim()) {
         Swal.fire("خطأ", "اكتب تعليقاً", "error");
         return;
     }
-
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
 
     const params = new URLSearchParams();
     params.append('action', 'add');
@@ -823,20 +899,40 @@ async function addComment() {
         
         nameInput.value = "";
         textInput.value = "";
+        
+        // Fermer la section d'ajout
+        document.getElementById('addCommentSection').style.display = 'none';
+        
         Swal.fire({ icon: 'success', title: 'تم الإضافة!', timer: 1500, showConfirmButton: false });
-        setTimeout(() => loadComments(true), 1000);
+        
+        // Mettre à jour le compteur
+        updateCommentsCount();
+        
     } catch(error) {
         nameInput.value = "";
         textInput.value = "";
         Swal.fire({ icon: 'success', title: 'تم الإرسال!', timer: 1500, showConfirmButton: false });
-        setTimeout(() => loadComments(true), 1000);
-    } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa fa-paper-plane"></i> إرسال التعليق';
+        document.getElementById('addCommentSection').style.display = 'none';
+        updateCommentsCount();
     }
 }
 
-// ==================== SOUMETTRE UNE RÉPONSE ====================
+async function updateCommentsCount() {
+    try {
+        const todayKey = getTodayKey();
+        const response = await fetch(API_URL);
+        const allData = await response.json();
+        const allComments = allData.filter(c => convertToDateKey(c.dayKey) === todayKey);
+        const parentComments = allComments.filter(c => !c.parentId || c.parentId === "" || c.parentId === null || c.parentId === 0);
+        const count = parentComments.length;
+        document.getElementById('commentCount').innerHTML = count;
+        document.getElementById('commentsCountHeader').innerHTML = count;
+    } catch(e) {
+        console.log("Erreur compteur");
+    }
+}
+
+// ==================== RÉPONSES ====================
 async function submitReply() {
     const nameInput = document.getElementById('replyName');
     const textInput = document.getElementById('replyText');
@@ -881,14 +977,17 @@ async function submitReply() {
         currentReplyParent = null;
         currentReplyParentName = "";
         
-        setTimeout(() => loadComments(true), 1000);
+        if (document.getElementById('commentsSection').style.display === 'block') {
+            loadComments(true);
+        }
     } catch(error) {
-        console.error("Erreur:", error);
         Swal.close();
         Swal.fire({ icon: 'success', title: 'تم الإرسال!', timer: 1500, showConfirmButton: false });
         currentReplyParent = null;
         currentReplyParentName = "";
-        setTimeout(() => loadComments(true), 1000);
+        if (document.getElementById('commentsSection').style.display === 'block') {
+            loadComments(true);
+        }
     }
 }
 
@@ -953,7 +1052,10 @@ async function deleteComment(commentId, buttonElement) {
     try {
         await fetch(`${API_URL}?${params.toString()}`);
         showNotification("✅ تم الحذف!");
-        loadComments(true);
+        if (document.getElementById('commentsSection').style.display === 'block') {
+            loadComments(true);
+        }
+        updateCommentsCount();
     } catch(error) {
         showNotification("❌ خطأ", true);
     }
@@ -984,7 +1086,9 @@ async function loadComments(showRefreshMessage = false) {
             repliesByParent[parentId].push(reply);
         });
         
-        document.getElementById('commentCount').innerHTML = `(${parentComments.length})`;
+        const count = parentComments.length;
+        document.getElementById('commentCount').innerHTML = count;
+        document.getElementById('commentsCountHeader').innerHTML = count;
         
         if (parentComments.length === 0) {
             document.getElementById("comments").innerHTML = `
@@ -994,7 +1098,6 @@ async function loadComments(showRefreshMessage = false) {
                     <small>كن أول من يعلق!</small>
                 </div>
             `;
-            if (showRefreshMessage) showNotification("📭 لا توجد تعليقات");
             return;
         }
         
@@ -1006,7 +1109,7 @@ async function loadComments(showRefreshMessage = false) {
             const commentDateTime = formatDateTime(comment.date);
             
             html += `
-                <div class="comment-card" data-id="${comment.id}">
+                <div class="comment-card">
                     <div class="comment-main">
                         <div class="comment-header">
                             <span class="comment-name">
@@ -1025,17 +1128,18 @@ async function loadComments(showRefreshMessage = false) {
                             ${isAdmin ? `<button class="btn-delete" onclick="deleteComment(${comment.id}, this)">🗑 حذف</button>` : ''}
                         </div>
                     </div>
-                    <div class="replies-section">
-                        <div class="replies-header">
-                            <button class="toggle-replies-btn" onclick="toggleReplies(${comment.id})" id="toggle-btn-${comment.id}">
-                                <i class="fas fa-comments"></i> الردود (${replyCount})
-                                <i class="fas fa-chevron-down" id="toggle-icon-${comment.id}"></i>
-                            </button>
+                    ${replyCount > 0 ? `
+                        <div class="replies-section">
+                            <div class="replies-header">
+                                <button class="toggle-replies-btn" onclick="toggleReplies(this, ${comment.id})">
+                                    <i class="fas fa-comments"></i> الردود (${replyCount}) ▼
+                                </button>
+                            </div>
+                            <div id="replies-${comment.id}" class="replies-container" style="display: none;">
+                                ${renderReplies(commentReplies, parentNames)}
+                            </div>
                         </div>
-                        <div id="replies-${comment.id}" class="replies-container" style="display: block;">
-                            ${renderReplies(commentReplies, parentNames)}
-                        </div>
-                    </div>
+                    ` : ''}
                 </div>
             `;
         });
@@ -1052,14 +1156,11 @@ async function loadComments(showRefreshMessage = false) {
                 <button class="btn btn-sm btn-success" onclick="loadComments(true)">🔄 إعادة المحاولة</button>
             </div>
         `;
-        if (showRefreshMessage) showNotification("❌ خطأ في الاتصال", true);
     }
 }
 
 function renderReplies(replies, parentNames) {
-    if (!replies || replies.length === 0) {
-        return `<div class="no-replies">📭 لا توجد ردود حتى الآن</div>`;
-    }
+    if (!replies || replies.length === 0) return '';
     
     let html = "";
     replies.forEach(reply => {
@@ -1094,29 +1195,18 @@ function renderReplies(replies, parentNames) {
     return html;
 }
 
-function toggleReplies(commentId) {
+function toggleReplies(button, commentId) {
     const container = document.getElementById(`replies-${commentId}`);
-    const icon = document.getElementById(`toggle-icon-${commentId}`);
-    const btn = document.getElementById(`toggle-btn-${commentId}`);
-    
     if (container.style.display === 'none') {
         container.style.display = 'block';
-        if (icon) icon.className = "fas fa-chevron-down";
-        if (btn) {
-            const count = container.querySelectorAll('.sub-comment').length;
-            btn.innerHTML = `<i class="fas fa-comments"></i> الردود (${count}) <i class="fas fa-chevron-down" id="toggle-icon-${commentId}"></i>`;
-        }
+        button.innerHTML = `<i class="fas fa-comments"></i> الردود (${container.querySelectorAll('.sub-comment').length}) ▲`;
     } else {
         container.style.display = 'none';
-        if (icon) icon.className = "fas fa-chevron-up";
-        if (btn) {
-            const count = container.querySelectorAll('.sub-comment').length;
-            btn.innerHTML = `<i class="fas fa-comments"></i> الردود (${count}) <i class="fas fa-chevron-up" id="toggle-icon-${commentId}"></i>`;
-        }
+        button.innerHTML = `<i class="fas fa-comments"></i> الردود (${container.querySelectorAll('.sub-comment').length}) ▼`;
     }
 }
 
-// ==================== ADMIN LOGIN ====================
+// ==================== ADMIN ====================
 function adminLogin() {
     Swal.fire({
         title: "وضع المشرف",
@@ -1128,9 +1218,10 @@ function adminLogin() {
     }).then(res => {
         if (res.value === "Seddik") {
             isAdmin = true;
-            document.getElementById('adminBadge').style.display = 'inline-block';
             Swal.fire({ icon: 'success', title: 'تم التفعيل!', timer: 2000, showConfirmButton: false });
-            loadComments(true);
+            if (document.getElementById('commentsSection').style.display === 'block') {
+                loadComments(true);
+            }
         } else if (res.value) {
             Swal.fire({ icon: 'error', title: 'كلمة المرور غير صحيحة' });
         }
@@ -1140,10 +1231,10 @@ function adminLogin() {
 // ==================== INITIALISATION ====================
 showWelcomeModal();
 loadAyah();
-loadComments(false);
+updateCommentsCount();
 
 setInterval(() => {
-    loadComments(false);
+    updateCommentsCount();
 }, 30000);
 </script>
 </body>
