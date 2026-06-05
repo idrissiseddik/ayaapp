@@ -13,7 +13,7 @@
 body{
     background:#f4f6f9;
     font-family:'Segoe UI', Arial, 'Traditional Arabic';
-    padding-top:95px;
+    padding-top:80px;
     padding-bottom:75px;
     direction: rtl;
 }
@@ -21,7 +21,6 @@ body{
     --main:#198754;
     --dark:#146c43;
     --border-green:#2ecc71;
-    --border-dark:#27ae60;
 }
 .header{
     position:fixed;
@@ -70,169 +69,65 @@ body{
     font-size:12px;
     z-index:1000;
 }
-.card-box{
-    margin:12px;
-    background:white;
-    padding:15px;
-    border-radius:15px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.08);
-}
 
-/* ========== BANNIÈRE RADIO CORAN ========== */
-.radio-banner {
-    margin: 12px;
-    margin-bottom: 12px;
-    background: linear-gradient(135deg, #1e2a3a 0%, #0f1724 100%);
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(46, 204, 113, 0.3);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-.radio-banner:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    border-color: var(--border-green);
-}
-.banner-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    gap: 12px;
-}
-.banner-icon {
-    background: rgba(46, 204, 113, 0.15);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: var(--border-green);
-    animation: pulse 2s infinite;
-}
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-}
-.banner-text {
-    flex: 1;
-}
-.banner-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffd966;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.banner-title i {
-    font-size: 14px;
-    color: var(--border-green);
-}
-.banner-message {
-    font-size: 12px;
-    color: #e0e0e0;
-    line-height: 1.4;
-}
-.banner-arrow {
-    color: var(--border-green);
-    font-size: 18px;
-    background: rgba(46, 204, 113, 0.2);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-}
-.radio-banner:hover .banner-arrow {
-    transform: translateX(-5px);
-}
-@media (max-width: 480px) {
-    .banner-content {
-        padding: 10px 12px;
-    }
-    .banner-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-    }
-    .banner-title {
-        font-size: 14px;
-    }
-    .banner-message {
-        font-size: 11px;
-    }
-    .banner-arrow {
-        width: 28px;
-        height: 28px;
-        font-size: 14px;
-    }
-}
-
-/* ========== CARTE AYAH UNIFIÉE ========== */
-.ayah-card {
-    background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
-    border-radius: 16px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    border: 3px solid var(--border-green);
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.15);
-}
-.verse-banner {
-    background: linear-gradient(135deg, var(--main), var(--dark));
-    padding: 15px 20px;
+/* ========== AYAH DIRECTE SANS CARTE ========== */
+.ayah-direct {
     text-align: center;
+    padding: 20px 15px;
+    background: transparent;
 }
-.verse-banner-text {
+.aya-bismillah {
     font-size: 18px;
-    color: white;
-    line-height: 1.8;
+    color: var(--main);
+    margin-bottom: 15px;
+    font-weight: bold;
 }
-.verse-banner-text strong {
-    color: white;
+.verse-title {
     font-size: 20px;
     font-weight: bold;
+    color: var(--dark);
+    margin-bottom: 25px;
+    line-height: 1.5;
 }
-.ayah-content {
-    padding: 25px 20px;
-    text-align: center;
+.verse-title span {
+    color: var(--main);
+    font-size: 22px;
 }
 .aya-text {
-    font-size: 24px;
+    font-size: 28px;
     text-align: center;
     line-height: 1.8;
-    margin: 20px 0;
+    margin: 30px 0;
     font-family: 'Traditional Arabic', 'Amiri', serif;
+    color: #1a1a2e;
 }
 .sadaq-allah {
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: var(--main);
     margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px dashed #ddd;
+    margin-bottom: 15px;
 }
 .date-info {
     text-align: center;
     font-size: 12px;
     color: #888;
-    margin-top: 10px;
+    margin-top: 5px;
+}
+.loading-spinner {
+    text-align: center;
+    padding: 50px;
+    background: transparent;
 }
 
 /* ========== BOUTONS PRINCIPAUX ========== */
+.buttons-wrapper {
+    margin: 15px 12px;
+}
 .main-buttons {
     display: flex;
     gap: 15px;
-    margin-bottom: 20px;
     justify-content: center;
 }
 .btn-main {
@@ -276,7 +171,82 @@ body{
     margin-right: 8px;
 }
 
-/* ========== MODALES (inchangées) ========== */
+/* ========== BANNIÈRE RADIO CORAN ========== */
+.radio-banner {
+    margin: 12px;
+    background: linear-gradient(135deg, #1e2a3a 0%, #0f1724 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+.radio-banner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    gap: 12px;
+}
+.banner-icon {
+    background: rgba(46, 204, 113, 0.15);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--border-green);
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
+.banner-text {
+    flex: 1;
+}
+.banner-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffd966;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.banner-message {
+    font-size: 12px;
+    color: #e0e0e0;
+    line-height: 1.4;
+}
+.banner-arrow {
+    color: var(--border-green);
+    font-size: 18px;
+    background: rgba(46, 204, 113, 0.2);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 480px) {
+    .banner-content { padding: 10px 12px; }
+    .banner-icon { width: 40px; height: 40px; font-size: 20px; }
+    .banner-title { font-size: 14px; }
+    .banner-message { font-size: 11px; }
+    .aya-text { font-size: 24px; }
+    .verse-title { font-size: 18px; }
+}
+
+/* ========== MODALES ========== */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -298,7 +268,6 @@ body{
     max-height: 85vh;
     overflow: hidden;
     animation: modalSlideUp 0.3s ease;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
 }
 @keyframes modalSlideUp {
     from { transform: translateY(50px); opacity: 0; }
@@ -354,7 +323,6 @@ body{
     font-size: 12px;
     z-index: 10;
 }
-.fullscreen-body .comment-card { margin-bottom: 20px; }
 .form-card { background: #f8f9fa; border-radius: 16px; padding: 20px; }
 .form-card input, .form-card textarea {
     border-radius: 10px;
@@ -362,7 +330,6 @@ body{
     padding: 12px;
     width: 100%;
     margin-bottom: 15px;
-    font-size: 14px;
 }
 .send-btn {
     background: linear-gradient(135deg, var(--main), var(--dark));
@@ -391,10 +358,10 @@ body{
     border-bottom: 1px solid #e8f5e9;
     padding-bottom: 8px;
 }
-.comment-name { font-weight: bold; color: var(--main); font-size: 15px; }
+.comment-name { font-weight: bold; color: var(--main); }
 .comment-date { font-size: 11px; color: #6c757d; background: #f8f9fa; padding: 3px 10px; border-radius: 20px; }
-.comment-text { margin: 12px 0; line-height: 1.7; color: #212529; text-align: right; font-size: 15px; }
-.comment-actions { display: flex; gap: 8px; margin-top: 10px; padding-top: 8px; border-top: 1px solid #f0f0f0; }
+.comment-text { margin: 12px 0; line-height: 1.7; }
+.comment-actions { display: flex; gap: 8px; margin-top: 10px; }
 .replies-section { background: #f0fdf4; border-top: 2px solid var(--border-green); padding: 12px 15px; }
 .sub-comment { margin-right: 40px; margin-top: 12px; padding: 12px; background: white; border-radius: 10px; border-right: 3px solid var(--border-green); }
 .reply-badge { display: inline-block; background: #e8f5e9; color: var(--dark); font-size: 10px; padding: 2px 8px; border-radius: 20px; margin-right: 8px; }
@@ -402,7 +369,7 @@ body{
 .btn-like, .reply-btn, .btn-delete { background: none; border: 1px solid; font-size: 11px; cursor: pointer; padding: 4px 12px; border-radius: 20px; }
 .btn-like { border-color: #dc3545; color: #dc3545; }
 .reply-btn { border-color: var(--main); color: var(--main); }
-.btn-delete { border-color: #dc3545; color: #dc3545; margin-right: 5px; }
+.btn-delete { border-color: #dc3545; color: #dc3545; }
 .toast-notification {
     position: fixed;
     bottom: 80px;
@@ -464,7 +431,6 @@ body{
 .welcome-divider { width: 80px; height: 3px; background: var(--main); margin: 0 auto 25px auto; }
 .welcome-text { font-size: 18px; line-height: 1.8; color: #333; margin-bottom: 35px; }
 .welcome-btn { background: linear-gradient(135deg, var(--main), var(--dark)); color: white; border: none; padding: 14px 48px; border-radius: 60px; font-size: 18px; font-weight: 600; cursor: pointer; }
-.loading-spinner { text-align: center; padding: 20px; }
 </style>
 </head>
 <body>
@@ -482,29 +448,24 @@ body{
     </div>
 </div>
 
-<!-- ========== CARTE AYAH ========== -->
-<div class="ayah-card" id="ayahCard" style="display: none;">
-    <div class="verse-banner">
-        <div class="verse-banner-text">
-            📖 <strong>يقول الله تعالى في سورة <span id="souraName"></span> الآية <span id="ayaNumber"></span>:</strong>
-        </div>
+<!-- ========== AYAH DIRECTE SANS CARTE ========== -->
+<div id="ayahContainer">
+    <div id="loadingAyah" class="loading-spinner">
+        <div class="spinner-border text-success" role="status"></div>
+        <p>جاري تحميل الآية...</p>
     </div>
-    <div class="ayah-content">
+    <div id="ayahDirect" class="ayah-direct" style="display: none;">
+        <div class="verse-title">
+            📖 <span>يقول الله تعالى في سورة <span id="souraName"></span> الآية <span id="ayaNumber"></span>:</span>
+        </div>
         <div class="aya-text" id="ayaText"></div>
         <div class="sadaq-allah">﴿ صدق الله العظيم ﴾</div>
         <div class="date-info" id="dateInfo"></div>
     </div>
 </div>
 
-<div id="loadingAyah" class="card-box">
-    <div class="loading-spinner">
-        <div class="spinner-border text-success" role="status"></div>
-        <p>جاري تحميل الآية...</p>
-    </div>
-</div>
-
 <!-- ========== BOUTONS PRINCIPAUX ========== -->
-<div class="card-box">
+<div class="buttons-wrapper">
     <div class="main-buttons">
         <button class="btn-main btn-add-comment" onclick="openAddCommentModal()">
             <i class="fas fa-plus-circle"></i> إضافة تعليق
@@ -516,7 +477,7 @@ body{
     </div>
 </div>
 
-<!-- ========== BANNIÈRE RADIO CORAN (NOUVELLE) ========== -->
+<!-- ========== BANNIÈRE RADIO CORAN ========== -->
 <div class="radio-banner" onclick="window.open('https://radiocoran.vercel.app', '_blank')">
     <div class="banner-content">
         <div class="banner-icon">
@@ -529,7 +490,7 @@ body{
                 <i class="fas fa-volume-up"></i>
             </div>
             <div class="banner-message">
-                🎧 استمع لتلاوات خاشعة من أشهر القراء الآن <br>
+                🎧 استمع لتلاوات خاشعة من أشهر القراء الآن<br>
                 <span style="font-size: 11px; color: #ffd966;">✨ اضغط هنا للاستماع المباشر ✨</span>
             </div>
         </div>
@@ -543,7 +504,7 @@ body{
     من تصميم : م.الصديق الإدريسي
 </div>
 
-<!-- ========== MODALES (inchangées) ========== -->
+<!-- ========== MODALES ========== -->
 <div id="addCommentModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
@@ -604,16 +565,22 @@ let currentReplyParent = null;
 let currentReplyParentName = "";
 
 // ==================== FONCTIONS MODALES ====================
-function openAddCommentModal() { document.getElementById('addCommentModal').style.display = 'flex'; document.getElementById('modalName').value = ''; document.getElementById('modalText').value = ''; }
+function openAddCommentModal() { 
+    document.getElementById('addCommentModal').style.display = 'flex'; 
+    document.getElementById('modalName').value = ''; 
+    document.getElementById('modalText').value = ''; 
+}
 function closeAddCommentModal() { document.getElementById('addCommentModal').style.display = 'none'; }
 function openFullscreenComments() { document.getElementById('fullscreenComments').style.display = 'block'; loadFullscreenComments(); }
 function closeFullscreenComments() { document.getElementById('fullscreenComments').style.display = 'none'; }
 function showWelcomeModal() { document.getElementById('welcomeModal').style.display = 'flex'; }
 function closeWelcomeModal() { document.getElementById('welcomeModal').style.display = 'none'; }
 function openReplyModal(parentId, parentName) {
-    currentReplyParent = parentId; currentReplyParentName = parentName;
+    currentReplyParent = parentId; 
+    currentReplyParentName = parentName;
     document.getElementById('replyingToText').innerHTML = `الرد على: <strong>${escapeHtml(parentName)}</strong>`;
-    document.getElementById('replyName').value = ''; document.getElementById('replyText').value = '';
+    document.getElementById('replyName').value = ''; 
+    document.getElementById('replyText').value = '';
     document.getElementById('replyModal').style.display = 'flex';
 }
 function closeReplyModal() { document.getElementById('replyModal').style.display = 'none'; currentReplyParent = null; }
@@ -621,29 +588,97 @@ function closeReplyModal() { document.getElementById('replyModal').style.display
 // ==================== UTILITAIRES ====================
 function formatDateTime(dateString) {
     if (!dateString) return "";
-    try { let date = new Date(dateString); if (isNaN(date.getTime())) return dateString.includes('/') ? dateString : "";
-    const d = String(date.getDate()).padStart(2,'0'); const m = String(date.getMonth()+1).padStart(2,'0'); const y = date.getFullYear();
-    const h = String(date.getHours()).padStart(2,'0'); const min = String(date.getMinutes()).padStart(2,'0');
-    return `${d}/${m}/${y} ${h}:${min}`; } catch(e) { return dateString; }
+    try { 
+        let date = new Date(dateString); 
+        if (isNaN(date.getTime())) return dateString.includes('/') ? dateString : "";
+        const d = String(date.getDate()).padStart(2,'0'); 
+        const m = String(date.getMonth()+1).padStart(2,'0'); 
+        const y = date.getFullYear();
+        const h = String(date.getHours()).padStart(2,'0'); 
+        const min = String(date.getMinutes()).padStart(2,'0');
+        return `${d}/${m}/${y} ${h}:${min}`; 
+    } catch(e) { return dateString; }
 }
 function getCurrentFormattedDateTime() {
     const now = new Date();
     return `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
 }
-function getTodayKey() { const today = new Date(); return `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`; }
-function getDailyNumber(max, seed) { let hash=0; for(let i=0;i<seed.length;i++) hash=((hash<<5)-hash)+seed.charCodeAt(i); return (Math.abs(Math.sin(hash)*10000)%max)+1; }
-function convertToDateKey(dateValue) { if(!dateValue) return null; try{ let d=new Date(dateValue); if(isNaN(d.getTime())) return null; return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }catch(e){return null;} }
-function showNotification(message, isError=false){ let t=document.createElement('div'); t.className='toast-notification'; t.style.background=isError?'rgba(220,53,69,0.9)':'rgba(25,135,84,0.9)'; t.innerHTML=message; document.body.appendChild(t); setTimeout(()=>t.remove(),3000); }
-function escapeHtml(text){ if(!text) return ''; let div=document.createElement('div'); div.textContent=text; return div.innerHTML; }
+function getTodayKey() { 
+    const today = new Date(); 
+    return `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`; 
+}
+function getDailyNumber(max, seed) { 
+    let hash=0; 
+    for(let i=0;i<seed.length;i++) hash=((hash<<5)-hash)+seed.charCodeAt(i); 
+    return (Math.abs(Math.sin(hash)*10000)%max)+1; 
+}
+function convertToDateKey(dateValue) { 
+    if(!dateValue) return null; 
+    try{ let d=new Date(dateValue); if(isNaN(d.getTime())) return null; 
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; 
+    }catch(e){return null;} 
+}
+function showNotification(message, isError=false){ 
+    let t=document.createElement('div'); 
+    t.className='toast-notification'; 
+    t.style.background=isError?'rgba(220,53,69,0.9)':'rgba(25,135,84,0.9)'; 
+    t.innerHTML=message; 
+    document.body.appendChild(t); 
+    setTimeout(()=>t.remove(),3000); 
+}
+function escapeHtml(text){ 
+    if(!text) return ''; 
+    let div=document.createElement('div'); 
+    div.textContent=text; 
+    return div.innerHTML; 
+}
 
-const sourateNamesAr = { "Al-Fatiha":"الفاتحة","Al-Baqarah":"البقرة","Aal-E-Imran":"آل عمران","An-Nisa":"النساء","Al-Ma'idah":"المائدة","Al-An'am":"الأنعام","Al-A'raf":"الأعراف","Al-Anfal":"الأنفال","At-Tawbah":"التوبة","Yunus":"يونس","Hud":"هود","Yusuf":"يوسف","Ar-Ra'd":"الرعد","Ibrahim":"إبراهيم","Al-Hijr":"الحجر","An-Nahl":"النحل","Al-Isra":"الإسراء","Al-Kahf":"الكهف","Maryam":"مريم","Ta-Ha":"طه","Al-Anbiya":"الأنبياء","Al-Hajj":"الحج","Al-Mu'minun":"المؤمنون","An-Nur":"النور","Al-Furqan":"الفرقان","Ash-Shu'ara":"الشعراء","An-Naml":"النمل","Al-Qasas":"القصص","Al-Ankabut":"العنكبوت","Ar-Rum":"الروم","Luqman":"لقمان","As-Sajdah":"السجدة","Al-Ahzab":"الأحزاب","Saba":"سبأ","Fatir":"فاطر","Ya-Sin":"يس","As-Saffat":"الصافات","Sad":"ص","Az-Zumar":"الزمر","Ghafir":"غافر","Fussilat":"فصلت","Ash-Shura":"الشورى","Az-Zukhruf":"الزخرف","Ad-Dukhan":"الدخان","Al-Jathiya":"الجاثية","Al-Ahqaf":"الأحقاف","Muhammad":"محمد","Al-Fath":"الفتح","Al-Hujurat":"الحجرات","Qaf":"ق","Adh-Dhariyat":"الذاريات","At-Tur":"الطور","An-Najm":"النجم","Al-Qamar":"القمر","Ar-Rahman":"الرحمن","Al-Waqi'a":"الواقعة","Al-Hadid":"الحديد","Al-Mujadila":"المجادلة","Al-Hashr":"الحشر","Al-Mumtahanah":"الممتحنة","As-Saff":"الصف","Al-Jumu'ah":"الجمعة","Al-Munafiqun":"المنافقون","At-Taghabun":"التغابن","At-Talaq":"الطلاق","At-Tahrim":"التحريم","Al-Mulk":"الملك","Al-Qalam":"القلم","Al-Haqqah":"الحاقة","Al-Ma'arij":"المعارج","Nuh":"نوح","Al-Jinn":"الجن","Al-Muzzammil":"المزمل","Al-Muddaththir":"المدثر","Al-Qiyamah":"القيامة","Al-Insan":"الإنسان","Al-Mursalat":"المرسلات","An-Naba":"النبأ","An-Nazi'at":"النازعات","Abasa":"عبس","At-Takwir":"التكوير","Al-Infitar":"الإنفطار","Al-Mutaffifin":"المطففين","Al-Inshiqaq":"الإنشقاق","Al-Buruj":"البروج","At-Tariq":"الطارق","Al-A'la":"الأعلى","Al-Ghashiyah":"الغاشية","Al-Fajr":"الفجر","Al-Balad":"البلد","Ash-Shams":"الشمس","Al-Layl":"الليل","Ad-Duha":"الضحى","Ash-Sharh":"الشرح","At-Tin":"التين","Al-Alaq":"العلق","Al-Qadr":"القدر","Al-Bayyinah":"البينة","Az-Zalzalah":"الزلزلة","Al-Adiyat":"العاديات","Al-Qari'ah":"القارعة","At-Takathur":"التكاثر","Al-Asr":"العصر","Al-Humazah":"الهمزة","Al-Fil":"الفيل","Quraish":"قريش","Al-Ma'un":"الماعون","Al-Kawthar":"الكوثر","Al-Kafirun":"الكافرون","An-Nasr":"النصر","Al-Masad":"المسد","Al-Ikhlas":"الإخلاص","Al-Falaq":"الفلق","An-Nas":"الناس"};
+const sourateNamesAr = {
+    "Al-Fatiha":"الفاتحة","Al-Baqarah":"البقرة","Aal-E-Imran":"آل عمران",
+    "An-Nisa":"النساء","Al-Ma'idah":"المائدة","Al-An'am":"الأنعام",
+    "Al-A'raf":"الأعراف","Al-Anfal":"الأنفال","At-Tawbah":"التوبة",
+    "Yunus":"يونس","Hud":"هود","Yusuf":"يوسف","Ar-Ra'd":"الرعد",
+    "Ibrahim":"إبراهيم","Al-Hijr":"الحجر","An-Nahl":"النحل",
+    "Al-Isra":"الإسراء","Al-Kahf":"الكهف","Maryam":"مريم",
+    "Ta-Ha":"طه","Al-Anbiya":"الأنبياء","Al-Hajj":"الحج",
+    "Al-Mu'minun":"المؤمنون","An-Nur":"النور","Al-Furqan":"الفرقان",
+    "Ash-Shu'ara":"الشعراء","An-Naml":"النمل","Al-Qasas":"القصص",
+    "Al-Ankabut":"العنكبوت","Ar-Rum":"الروم","Luqman":"لقمان",
+    "As-Sajdah":"السجدة","Al-Ahzab":"الأحزاب","Saba":"سبأ",
+    "Fatir":"فاطر","Ya-Sin":"يس","As-Saffat":"الصافات",
+    "Sad":"ص","Az-Zumar":"الزمر","Ghafir":"غافر","Fussilat":"فصلت",
+    "Ash-Shura":"الشورى","Az-Zukhruf":"الزخرف","Ad-Dukhan":"الدخان",
+    "Al-Jathiya":"الجاثية","Al-Ahqaf":"الأحقاف","Muhammad":"محمد",
+    "Al-Fath":"الفتح","Al-Hujurat":"الحجرات","Qaf":"ق",
+    "Adh-Dhariyat":"الذاريات","At-Tur":"الطور","An-Najm":"النجم",
+    "Al-Qamar":"القمر","Ar-Rahman":"الرحمن","Al-Waqi'a":"الواقعة",
+    "Al-Hadid":"الحديد","Al-Mujadila":"المجادلة","Al-Hashr":"الحشر",
+    "Al-Mumtahanah":"الممتحنة","As-Saff":"الصف","Al-Jumu'ah":"الجمعة",
+    "Al-Munafiqun":"المنافقون","At-Taghabun":"التغابن","At-Talaq":"الطلاق",
+    "At-Tahrim":"التحريم","Al-Mulk":"الملك","Al-Qalam":"القلم",
+    "Al-Haqqah":"الحاقة","Al-Ma'arij":"المعارج","Nuh":"نوح",
+    "Al-Jinn":"الجن","Al-Muzzammil":"المزمل","Al-Muddaththir":"المدثر",
+    "Al-Qiyamah":"القيامة","Al-Insan":"الإنسان","Al-Mursalat":"المرسلات",
+    "An-Naba":"النبأ","An-Nazi'at":"النازعات","Abasa":"عبس",
+    "At-Takwir":"التكوير","Al-Infitar":"الإنفطار","Al-Mutaffifin":"المطففين",
+    "Al-Inshiqaq":"الإنشقاق","Al-Buruj":"البروج","At-Tariq":"الطارق",
+    "Al-A'la":"الأعلى","Al-Ghashiyah":"الغاشية","Al-Fajr":"الفجر",
+    "Al-Balad":"البلد","Ash-Shams":"الشمس","Al-Layl":"الليل",
+    "Ad-Duha":"الضحى","Ash-Sharh":"الشرح","At-Tin":"التين",
+    "Al-Alaq":"العلق","Al-Qadr":"القدر","Al-Bayyinah":"البينة",
+    "Az-Zalzalah":"الزلزلة","Al-Adiyat":"العاديات","Al-Qari'ah":"القارعة",
+    "At-Takathur":"التكاثر","Al-Asr":"العصر","Al-Humazah":"الهمزة",
+    "Al-Fil":"الفيل","Quraish":"قريش","Al-Ma'un":"الماعون",
+    "Al-Kawthar":"الكوثر","Al-Kafirun":"الكافرون","An-Nasr":"النصر",
+    "Al-Masad":"المسد","Al-Ikhlas":"الإخلاص","Al-Falaq":"الفلق","An-Nas":"الناس"
+};
 
 // ==================== CHARGEMENT AYAH ====================
 async function loadAyah() {
     try {
         const todayKey = getTodayKey();
         let ayah = localStorage.getItem(`ayah_fixed_${todayKey}`);
-        if(ayah){ displayUnifiedAyah(JSON.parse(ayah)); return; }
+        if(ayah){ displayDirectAyah(JSON.parse(ayah)); return; }
         const sourateNumber = getDailyNumber(114, todayKey);
         const versetNumber = getDailyNumber(10, todayKey+"verse");
         const res = await fetch(`https://api.alquran.cloud/v1/ayah/${sourateNumber}:${versetNumber}`);
@@ -661,12 +696,15 @@ async function loadAyah() {
             ayahData = { sourateNameFr, sourateNameAr, ayahNumber: fallbackData.data.numberInSurah, ayahText: fallbackData.data.text };
         }
         localStorage.setItem(`ayah_fixed_${todayKey}`, JSON.stringify(ayahData));
-        displayUnifiedAyah(ayahData);
-    } catch(error){ document.getElementById("loadingAyah").innerHTML = `<div class="text-center text-danger">خطأ في تحميل الآية</div>`; }
+        displayDirectAyah(ayahData);
+    } catch(error){ 
+        document.getElementById("loadingAyah").innerHTML = `<div class="text-center text-danger">خطأ في تحميل الآية</div>`; 
+    }
 }
-function displayUnifiedAyah(ayah) {
+function displayDirectAyah(ayah) {
     document.getElementById('loadingAyah').style.display = 'none';
-    document.getElementById('ayahCard').style.display = 'block';
+    const ayahDiv = document.getElementById('ayahDirect');
+    ayahDiv.style.display = 'block';
     document.getElementById('souraName').innerHTML = ayah.sourateNameAr;
     document.getElementById('ayaNumber').innerHTML = ayah.ayahNumber;
     document.getElementById('ayaText').innerHTML = ayah.ayahText;
@@ -678,8 +716,11 @@ async function addCommentFromModal() {
     const nameInput = document.getElementById("modalName"), textInput = document.getElementById("modalText");
     if(!textInput.value.trim()){ Swal.fire("خطأ","اكتب تعليقاً","error"); return; }
     const params = new URLSearchParams();
-    params.append('action','add'); params.append('name', nameInput.value.trim()||"مجهول"); params.append('text', textInput.value.trim());
-    params.append('dayKey', getTodayKey()); params.append('type','comment');
+    params.append('action','add'); 
+    params.append('name', nameInput.value.trim()||"مجهول"); 
+    params.append('text', textInput.value.trim());
+    params.append('dayKey', getTodayKey()); 
+    params.append('type','comment');
     try{
         await fetch(`${API_URL}?${params.toString()}`,{method:'GET',mode:'no-cors'});
         nameInput.value=""; textInput.value=""; closeAddCommentModal();
@@ -709,7 +750,8 @@ async function submitReply(){
     const name=nameInput.value.trim()||'مجهول', text=textInput.value.trim();
     if(!text){ Swal.fire('خطأ','الرجاء كتابة الرد','error'); return; }
     if(!currentReplyParent){ Swal.fire('خطأ','معرف التعليق الأصلي مفقود','error'); return; }
-    closeReplyModal(); Swal.fire({ title:'جاري الإرسال...', allowOutsideClick:false, didOpen:()=>{ Swal.showLoading(); } });
+    closeReplyModal(); 
+    Swal.fire({ title:'جاري الإرسال...', allowOutsideClick:false, didOpen:()=>{ Swal.showLoading(); } });
     const params=new URLSearchParams();
     params.append('action','add'); params.append('name',name); params.append('text',text); params.append('dayKey',getTodayKey());
     params.append('parentId',currentReplyParent); params.append('parentName',currentReplyParentName); params.append('type','reply');
@@ -727,12 +769,14 @@ async function submitReply(){
     }
 }
 async function likeComment(commentId, buttonElement){
-    const likeSpan=buttonElement.querySelector('.like-count'); const currentLikes=likeSpan?parseInt(likeSpan.textContent):0;
+    const likeSpan=buttonElement.querySelector('.like-count'); 
+    const currentLikes=likeSpan?parseInt(likeSpan.textContent):0;
     buttonElement.disabled=true; buttonElement.style.opacity='0.6';
     if(likeSpan) likeSpan.textContent=currentLikes+1;
     const params=new URLSearchParams(); params.append('action','like'); params.append('id',commentId);
     try{
-        const response=await fetch(`${API_URL}?${params.toString()}`); const result=await response.json();
+        const response=await fetch(`${API_URL}?${params.toString()}`); 
+        const result=await response.json();
         if(result.success&&likeSpan) likeSpan.textContent=result.likes;
         else if(likeSpan) likeSpan.textContent=currentLikes;
     } catch(error){ if(likeSpan) likeSpan.textContent=currentLikes; }
@@ -743,16 +787,20 @@ async function deleteComment(commentId, buttonElement){
     const confirm=await Swal.fire({ title:'حذف التعليق', text:'هل أنت متأكد؟', icon:'warning', showCancelButton:true, confirmButtonText:'نعم', cancelButtonText:'إلغاء' });
     if(!confirm.isConfirmed) return;
     const params=new URLSearchParams(); params.append('action','delete'); params.append('id',commentId);
-    try{ await fetch(`${API_URL}?${params.toString()}`); showNotification("✅ تم الحذف!");
-    if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments();
-    updateCommentsCount(); } catch(error){ showNotification("❌ خطأ",true); }
+    try{ 
+        await fetch(`${API_URL}?${params.toString()}`); 
+        showNotification("✅ تم الحذف!");
+        if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments();
+        updateCommentsCount(); 
+    } catch(error){ showNotification("❌ خطأ",true); }
 }
 async function loadFullscreenComments(){
     const container=document.getElementById('fullscreenCommentsBody');
     container.innerHTML=`<div class="loading-comments"><div class="spinner-border text-success"></div><p>جاري تحميل التعليقات...</p></div>`;
     try{
-        const todayKey=getTodayKey(); const response=await fetch(API_URL); const allData=await response.json();
-        if(allData.error) throw new Error(allData.error);
+        const todayKey=getTodayKey(); 
+        const response=await fetch(API_URL); 
+        const allData=await response.json();
         const allComments=allData.filter(c=>convertToDateKey(c.dayKey)===todayKey);
         const parentComments=allComments.filter(c=>!c.parentId||c.parentId===""||c.parentId===null||c.parentId===0);
         const replies=allComments.filter(c=>c.parentId&&c.parentId!==""&&c.parentId!==null&&c.parentId!==0);
@@ -760,34 +808,54 @@ async function loadFullscreenComments(){
         const repliesByParent={}; replies.forEach(r=>{ if(!repliesByParent[r.parentId]) repliesByParent[r.parentId]=[]; repliesByParent[r.parentId].push(r); });
         document.getElementById('commentsCountHeader').innerHTML=parentComments.length;
         document.getElementById('fullscreenCommentCount').innerHTML=parentComments.length;
-        if(parentComments.length===0){ container.innerHTML=`<div class="text-center text-muted py-5"><i class="fas fa-comment-dots fa-3x mb-3"></i><p>لا توجد تعليقات لهذا اليوم</p><small>كن أول من يعلق!</small></div>`; return; }
+        if(parentComments.length===0){ 
+            container.innerHTML=`<div class="text-center text-muted py-5"><i class="fas fa-comment-dots fa-3x mb-3"></i><p>لا توجد تعليقات لهذا اليوم</p><small>كن أول من يعلق!</small></div>`; 
+            return; 
+        }
         let html="";
         parentComments.forEach(comment=>{
-            const commentId=String(comment.id); const commentReplies=repliesByParent[commentId]||[]; const replyCount=commentReplies.length;
+            const commentId=String(comment.id); 
+            const commentReplies=repliesByParent[commentId]||[]; 
+            const replyCount=commentReplies.length;
             html+=`<div class="comment-card"><div class="comment-main"><div class="comment-header"><span class="comment-name"><i class="fas fa-user-circle"></i> ${escapeHtml(comment.name)}</span><span class="comment-date">📅 ${formatDateTime(comment.date)}</span></div><div class="comment-text">${escapeHtml(comment.text)}</div><div class="comment-actions"><button class="btn-like" onclick="likeComment(${comment.id}, this)">❤️ <span class="like-count">${comment.likes||0}</span></button><button class="reply-btn" onclick="openReplyModal(${comment.id}, '${escapeHtml(comment.name)}')"><i class="fas fa-reply"></i> رد</button>${isAdmin?`<button class="btn-delete" onclick="deleteComment(${comment.id}, this)">🗑 حذف</button>`:''}</div></div>${replyCount>0?`<div class="replies-section"><div class="replies-header"><button class="toggle-replies-btn" onclick="toggleRepliesFullscreen(this, ${comment.id})"><i class="fas fa-comments"></i> الردود (${replyCount}) ▼</button></div><div id="fullscreen-replies-${comment.id}" class="replies-container" style="display: none;">${renderRepliesFullscreen(commentReplies,parentNames)}</div></div>`:''}</div>`;
         });
         container.innerHTML=html;
-    } catch(error){ container.innerHTML=`<div class="text-center text-danger py-5"><i class="fas fa-wifi fa-3x mb-3"></i><p>⚠️ خطأ في الاتصال</p><button class="btn btn-sm btn-success" onclick="loadFullscreenComments()">🔄 إعادة المحاولة</button></div>`; }
+    } catch(error){ 
+        container.innerHTML=`<div class="text-center text-danger py-5"><i class="fas fa-wifi fa-3x mb-3"></i><p>⚠️ خطأ في الاتصال</p><button class="btn btn-sm btn-success" onclick="loadFullscreenComments()">🔄 إعادة المحاولة</button></div>`; 
+    }
 }
 function renderRepliesFullscreen(replies,parentNames){
     if(!replies||replies.length===0) return '';
     let html="";
-    replies.forEach(reply=>{ const repliedToName=parentNames[reply.parentId]||"التعليق الأصلي";
+    replies.forEach(reply=>{ 
+        const repliedToName=parentNames[reply.parentId]||"التعليق الأصلي";
         html+=`<div class="sub-comment"><div class="comment-header"><span class="comment-name"><i class="fas fa-reply-all"></i> ${escapeHtml(reply.name)}<span class="reply-badge">رد</span></span><span class="comment-date">📅 ${formatDateTime(reply.date)}</span></div><div class="comment-text"><span class="reply-to"><i class="fas fa-reply"></i> رداً على: <span class="reply-to-name">${escapeHtml(repliedToName)}</span></span><br><br>${escapeHtml(reply.text)}</div><div class="comment-actions"><button class="btn-like" onclick="likeComment(${reply.id}, this)">❤️ <span class="like-count">${reply.likes||0}</span></button>${isAdmin?`<button class="btn-delete" onclick="deleteComment(${reply.id}, this)">🗑 حذف</button>`:''}</div></div>`;
-    }); return html;
+    }); 
+    return html;
 }
 function toggleRepliesFullscreen(button, commentId){
     const container=document.getElementById(`fullscreen-replies-${commentId}`);
-    if(container.style.display==='none'){ container.style.display='block'; button.innerHTML=`<i class="fas fa-comments"></i> الردود (${container.querySelectorAll('.sub-comment').length}) ▲`; }
-    else{ container.style.display='none'; button.innerHTML=`<i class="fas fa-comments"></i> الردود (${container.querySelectorAll('.sub-comment').length}) ▼`; }
+    if(container.style.display==='none'){ 
+        container.style.display='block'; 
+        button.innerHTML=`<i class="fas fa-comments"></i> الردود (${container.querySelectorAll('.sub-comment').length}) ▲`; 
+    } else { 
+        container.style.display='none'; 
+        button.innerHTML=`<i class="fas fa-comments"></i> الردود (${container.querySelectorAll('.sub-comment').length}) ▼`; 
+    }
 }
 function adminLogin(){
     Swal.fire({ title:"وضع المشرف", text:"أدخل كلمة المرور", input:"password", showCancelButton:true, confirmButtonText:"تأكيد", cancelButtonText:"إلغاء" }).then(res=>{
-        if(res.value==="Seddik"){ isAdmin=true; Swal.fire({ icon:'success', title:'تم التفعيل!', timer:2000, showConfirmButton:false }); if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments(); }
-        else if(res.value) Swal.fire({ icon:'error', title:'كلمة المرور غير صحيحة' });
+        if(res.value==="Seddik"){ 
+            isAdmin=true; 
+            Swal.fire({ icon:'success', title:'تم التفعيل!', timer:2000, showConfirmButton:false }); 
+            if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments(); 
+        } else if(res.value) Swal.fire({ icon:'error', title:'كلمة المرور غير صحيحة' });
     });
 }
-showWelcomeModal(); loadAyah(); updateCommentsCount(); setInterval(()=>{ updateCommentsCount(); },30000);
+showWelcomeModal(); 
+loadAyah(); 
+updateCommentsCount(); 
+setInterval(()=>{ updateCommentsCount(); },30000);
 </script>
 </body>
 </html>
