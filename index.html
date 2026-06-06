@@ -1010,7 +1010,6 @@ async function loadFullscreenComments() {
         const response = await fetch(API_URL);
         const allData = await response.json();
         
-        // Ajouter le bouton "Ajouter un commentaire" dans la modale
         let html = `<button class="btn-add-in-modal" onclick="closeFullscreenComments(); openAddCommentModal();">
                         <i class="fas fa-plus-circle"></i> إضافة تعليق جديد
                     </button>`;
@@ -1046,7 +1045,8 @@ async function loadFullscreenComments() {
             return;
         }
         
-        parentComments.sort((a, b) => new Date(b.date) - new Date(a.date));
+        // Tri: du plus ancien au plus récent
+        parentComments.sort((a, b) => new Date(a.date) - new Date(b.date));
         
         parentComments.forEach(parent => {
             const parentId = String(parent.id);
