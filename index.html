@@ -74,6 +74,25 @@ body{
     z-index:1000;
 }
 
+/* ========== MESSAGE DIVIN ENTRE HEADER ET AYA ========== */
+.divine-message {
+    text-align: center;
+    background: #e9f7ef;
+    margin: 10px 15px 0 15px;
+    padding: 10px 15px;
+    border-radius: 40px;
+    color: #146c43;
+    font-size: 14px;
+    font-weight: 500;
+    border-right: 5px solid var(--main);
+    border-left: 5px solid var(--main);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.divine-message span {
+    font-weight: bold;
+    color: #0a4d2a;
+}
+
 /* ========== AYAH DIRECTE ========== */
 .ayah-direct {
     text-align: center;
@@ -242,6 +261,7 @@ body{
     .banner-message { font-size: 11px; }
     .aya-text { font-size: 24px; }
     .verse-title { font-size: 18px; }
+    .divine-message { font-size: 12px; padding: 6px 12px; }
 }
 
 /* ========== CARTE COMMENTAIRE PARENT ========== */
@@ -679,6 +699,17 @@ body{
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
 }
+
+/* ========== STYLE POUR LE MESSAGE DANS LA MODALE ========== */
+.modal-footer-message {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 11px;
+    color: #146c43;
+    font-weight: 500;
+}
 </style>
 </head>
 <body>
@@ -694,6 +725,11 @@ body{
             <i class="fa fa-lock"></i>
         </button>
     </div>
+</div>
+
+<!-- MESSAGE SANS ICONES ENTRE HEADER ET AYA -->
+<div class="divine-message">
+    <span>آية مختارة من القرآن الكريم لعلها تكون رسالة</span>
 </div>
 
 <!-- AYAH DIRECTE -->
@@ -737,9 +773,15 @@ body{
     </div>
 </div>
 
-<div class="footer">من تصميم : م.الصديق الإدريسي</div>
+<!-- FOOTER AVEC MESSAGE SANS ICONE -->
+<div class="footer">
+    <div>من تصميم : م.الصديق الإدريسي</div>
+    <div style="font-size: 11px; margin-top: 4px; font-weight: 500;">
+        لا تنسونا من صالح دعائكم و لكم بالمثل
+    </div>
+</div>
 
-<!-- MODALES -->
+<!-- MODALE AJOUT COMMENTAIRE -->
 <div id="addCommentModal" class="modal-overlay">
     <div class="modal-container">
         <div class="modal-header">
@@ -751,6 +793,10 @@ body{
                 <input type="text" id="modalName" placeholder="👤 اسمك">
                 <textarea id="modalText" rows="5" placeholder="📝 اكتب تعليقك أو تفسيرك..."></textarea>
                 <button class="send-btn" onclick="addCommentFromModal()"><i class="fas fa-paper-plane"></i> إرسال التعليق</button>
+                <!-- MESSAGE DE FOOTER DANS LA MODALE -->
+                <div class="modal-footer-message">
+                    لا تنسونا من صالح دعائكم و لكم بالمثل
+                </div>
             </div>
         </div>
     </div>
@@ -764,7 +810,10 @@ body{
     <div class="fullscreen-body" id="fullscreenCommentsBody">
         <div class="loading-comments"><div class="spinner-border text-success"></div><p>جاري تحميل التعليقات...</p></div>
     </div>
-    <div class="fullscreen-footer">من تصميم : م.الصديق الإدريسي</div>
+    <div class="fullscreen-footer">
+        من تصميم : م.الصديق الإدريسي<br>
+        لا تنسونا من صالح دعائكم و لكم بالمثل
+    </div>
 </div>
 
 <div id="replyModal" class="reply-modal">
@@ -777,6 +826,9 @@ body{
         <div style="display: flex; gap: 10px; margin-top: 15px;">
             <button class="btn btn-success" style="flex:1" onclick="submitReply()">إرسال الرد</button>
             <button class="btn btn-secondary" style="flex:1" onclick="closeReplyModal()">إلغاء</button>
+        </div>
+        <div class="modal-footer-message" style="margin-top: 20px;">
+            لا تنسونا من صالح دعائكم و لكم بالمثل
         </div>
     </div>
 </div>
@@ -1045,7 +1097,6 @@ async function loadFullscreenComments() {
             return;
         }
         
-        // Tri: du plus ancien au plus récent
         parentComments.sort((a, b) => new Date(a.date) - new Date(b.date));
         
         parentComments.forEach(parent => {
