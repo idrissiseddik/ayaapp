@@ -301,6 +301,16 @@ body{
     margin: 12px 0;
     line-height: 1.7;
     font-size: 15px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.reply-text {
+    margin: 12px 0 8px 0;
+    line-height: 1.65;
+    font-size: 14px;
+    color: #1a4a2a;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 .comment-actions {
     display: flex;
@@ -424,12 +434,6 @@ body{
     background: rgba(255,255,255,0.8);
     padding: 2px 12px;
     border-radius: 20px;
-}
-.reply-text {
-    margin: 12px 0 8px 0;
-    line-height: 1.65;
-    font-size: 14px;
-    color: #1a4a2a;
 }
 .reply-actions {
     display: flex;
@@ -590,6 +594,10 @@ body{
     font-weight: bold;
     cursor: pointer;
     width: 100%;
+}
+.send-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 .toast-notification {
     position: fixed;
@@ -792,7 +800,7 @@ body{
             <div class="form-card">
                 <input type="text" id="modalName" placeholder="👤 اسمك">
                 <textarea id="modalText" rows="5" placeholder="📝 اكتب تعليقك أو تفسيرك..."></textarea>
-                <button class="send-btn" onclick="addCommentFromModal()"><i class="fas fa-paper-plane"></i> إرسال التعليق</button>
+                <button class="send-btn" id="sendCommentBtn" onclick="addCommentFromModal()"><i class="fas fa-paper-plane"></i> إرسال التعليق</button>
                 <!-- MESSAGE DE FOOTER DANS LA MODALE -->
                 <div class="modal-footer-message">
                     لا تنسونا من صالح دعائكم و لكم بالمثل
@@ -824,7 +832,7 @@ body{
         <input type="text" id="replyName" placeholder="👤 اسمك" class="form-control mb-2">
         <textarea id="replyText" rows="3" placeholder="✏️ اكتب ردك..." class="form-control"></textarea>
         <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button class="btn btn-success" style="flex:1" onclick="submitReply()">إرسال الرد</button>
+            <button class="btn btn-success" style="flex:1" id="sendReplyBtn" onclick="submitReply()">إرسال الرد</button>
             <button class="btn btn-secondary" style="flex:1" onclick="closeReplyModal()">إلغاء</button>
         </div>
         <div class="modal-footer-message" style="margin-top: 20px;">
@@ -850,6 +858,13 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyV11qMDxMJYeLfzjTD1qsb
 let isAdmin = false;
 let currentReplyParent = null;
 let currentReplyParentName = "";
+
+// Fonction pour préserver les retours à la ligne dans l'affichage
+function formatTextWithLineBreaks(text) {
+    if (!text) return '';
+    // Remplacer les retours à la ligne par des <br> tout en échappant les caractères HTML
+    return escapeHtml(text).replace(/\n/g, '<br>');
+}
 
 // ==================== FONCTIONS MODALES ====================
 function openAddCommentModal() { 
@@ -964,27 +979,49 @@ function displayDirectAyah(ayah) {
 
 // ==================== COMMENTAIRES ====================
 async function addCommentFromModal() {
-    const nameInput = document.getElementById("modalName"), textInput = document.getElementById("modalText");
+    const nameInput = document.getElementById("modalName");
+    const textInput = document.getElementById("modalText");
+    const sendBtn = document.getElementById("sendCommentBtn");
+    
     if(!textInput.value.trim()){ 
         await Swal.fire("خطأ","اكتب تعليقاً","error"); 
         return; 
     }
+    
+    // Désactiver le bouton et afficher le message de chargement
+    const originalBtnText = sendBtn.innerHTML;
+    sendBtn.disabled = true;
+    sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+    
     const params = new URLSearchParams();
-    params.append('action','add'); params.append('name', nameInput.value.trim()||"مجهول"); params.append('text', textInput.value.trim());
-    params.append('dayKey', getTodayKey()); params.append('type','comment');
+    params.append('action','add'); 
+    params.append('name', nameInput.value.trim()||"مجهول"); 
+    params.append('text', textInput.value.trim());
+    params.append('dayKey', getTodayKey()); 
+    params.append('type','comment');
+    
     try{
         await fetch(`${API_URL}?${params.toString()}`,{method:'GET',mode:'no-cors'});
-        nameInput.value=""; textInput.value=""; closeAddCommentModal();
+        nameInput.value=""; 
+        textInput.value=""; 
+        closeAddCommentModal();
         await Swal.fire({ icon:'success', title:'تم الإضافة!', timer:1500, showConfirmButton:false });
         updateCommentsCount();
         if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments();
     } catch(error){
-        nameInput.value=""; textInput.value=""; closeAddCommentModal();
+        nameInput.value=""; 
+        textInput.value=""; 
+        closeAddCommentModal();
         await Swal.fire({ icon:'success', title:'تم الإرسال!', timer:1500, showConfirmButton:false });
         updateCommentsCount();
         if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments();
+    } finally {
+        // Réactiver le bouton
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = originalBtnText;
     }
 }
+
 async function updateCommentsCount(){
     try{
         const todayKey=getTodayKey();
@@ -996,9 +1033,13 @@ async function updateCommentsCount(){
         document.getElementById('fullscreenCommentCount').innerHTML=parentComments.length;
     } catch(e){}
 }
+
 async function submitReply(){
-    const nameInput=document.getElementById('replyName'), textInput=document.getElementById('replyText');
+    const nameInput=document.getElementById('replyName');
+    const textInput=document.getElementById('replyText');
+    const sendReplyBtn = document.getElementById('sendReplyBtn');
     const name=nameInput.value.trim()||'مجهول', text=textInput.value.trim();
+    
     if(!text){ 
         await Swal.fire('خطأ','الرجاء كتابة الرد','error'); 
         return; 
@@ -1007,49 +1048,84 @@ async function submitReply(){
         await Swal.fire('خطأ','معرف التعليق الأصلي مفقود','error'); 
         return; 
     }
-    closeReplyModal(); 
-    await Swal.fire({ title:'جاري الإرسال...', allowOutsideClick:false, didOpen:()=>{ Swal.showLoading(); } });
+    
+    // Désactiver le bouton et afficher le message de chargement
+    const originalBtnText = sendReplyBtn.innerHTML;
+    sendReplyBtn.disabled = true;
+    sendReplyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+    
     const params=new URLSearchParams();
-    params.append('action','add'); params.append('name',name); params.append('text',text); params.append('dayKey',getTodayKey());
-    params.append('parentId', currentReplyParent); params.append('parentName',currentReplyParentName); params.append('type','reply');
+    params.append('action','add'); 
+    params.append('name',name); 
+    params.append('text',text); 
+    params.append('dayKey',getTodayKey());
+    params.append('parentId', currentReplyParent); 
+    params.append('parentName',currentReplyParentName); 
+    params.append('type','reply');
+    
     try{
         await fetch(`${API_URL}?${params.toString()}`,{method:'GET',mode:'no-cors'});
-        Swal.close(); 
+        closeReplyModal();
         await Swal.fire({ icon:'success', title:'تم إرسال الرد!', timer:1500, showConfirmButton:false });
-        currentReplyParent=null; currentReplyParentName="";
-        setTimeout(() => { if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments(); updateCommentsCount(); }, 1000);
+        currentReplyParent=null; 
+        currentReplyParentName="";
+        setTimeout(() => { 
+            if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments(); 
+            updateCommentsCount(); 
+        }, 1000);
     } catch(error){
-        Swal.close(); 
+        closeReplyModal();
         await Swal.fire({ icon:'success', title:'تم الإرسال!', timer:1500, showConfirmButton:false });
-        currentReplyParent=null; currentReplyParentName="";
-        setTimeout(() => { if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments(); updateCommentsCount(); }, 1000);
+        currentReplyParent=null; 
+        currentReplyParentName="";
+        setTimeout(() => { 
+            if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments(); 
+            updateCommentsCount(); 
+        }, 1000);
+    } finally {
+        // Réactiver le bouton
+        sendReplyBtn.disabled = false;
+        sendReplyBtn.innerHTML = originalBtnText;
     }
 }
+
 async function likeComment(commentId, buttonElement){
     const likeSpan=buttonElement.querySelector('.like-count'); 
     const currentLikes=likeSpan?parseInt(likeSpan.textContent):0;
-    buttonElement.disabled=true; buttonElement.style.opacity='0.6';
+    buttonElement.disabled=true; 
+    buttonElement.style.opacity='0.6';
     if(likeSpan) likeSpan.textContent=currentLikes+1;
-    const params=new URLSearchParams(); params.append('action','like'); params.append('id',commentId);
+    const params=new URLSearchParams(); 
+    params.append('action','like'); 
+    params.append('id',commentId);
     try{
         const response=await fetch(`${API_URL}?${params.toString()}`); 
         const result=await response.json();
         if(result.success && likeSpan) likeSpan.textContent=result.likes;
         else if(likeSpan) likeSpan.textContent=currentLikes;
-    } catch(error){ if(likeSpan) likeSpan.textContent=currentLikes; }
-    finally{ buttonElement.disabled=false; buttonElement.style.opacity='1'; }
+    } catch(error){ 
+        if(likeSpan) likeSpan.textContent=currentLikes; 
+    } finally{ 
+        buttonElement.disabled=false; 
+        buttonElement.style.opacity='1'; 
+    }
 }
+
 async function deleteComment(commentId, buttonElement){
     if(!isAdmin){ showNotification("❌ وضع المشرف غير مفعل",true); return; }
     const confirm=await Swal.fire({ title:'حذف التعليق', text:'هل أنت متأكد؟', icon:'warning', showCancelButton:true, confirmButtonText:'نعم', cancelButtonText:'إلغاء' });
     if(!confirm.isConfirmed) return;
-    const params=new URLSearchParams(); params.append('action','delete'); params.append('id',commentId);
+    const params=new URLSearchParams(); 
+    params.append('action','delete'); 
+    params.append('id',commentId);
     try{ 
         await fetch(`${API_URL}?${params.toString()}`); 
         showNotification("✅ تم الحذف!");
         if(document.getElementById('fullscreenComments').style.display==='block') loadFullscreenComments();
         updateCommentsCount(); 
-    } catch(error){ showNotification("❌ خطأ",true); }
+    } catch(error){ 
+        showNotification("❌ خطأ",true); 
+    }
 }
 
 // ==================== CHARGER COMMENTAIRES ====================
@@ -1112,7 +1188,7 @@ async function loadFullscreenComments() {
                             <span class="comment-name"><i class="fas fa-user-circle"></i> ${escapeHtml(parent.name)}</span>
                             <span class="comment-date">📅 ${formatDateTime(parent.date)}</span>
                         </div>
-                        <div class="comment-text">${escapeHtml(parent.text)}</div>
+                        <div class="comment-text">${formatTextWithLineBreaks(parent.text)}</div>
                         <div class="comment-actions">
                             <button class="btn-like" onclick="likeComment(${parent.id}, this)">
                                 ❤️ <span class="like-count">${parent.likes || 0}</span>
@@ -1152,7 +1228,7 @@ async function loadFullscreenComments() {
                                     </div>
                                     <span class="reply-date">📅 ${formatDateTime(reply.date)}</span>
                                 </div>
-                                <div class="reply-text">${escapeHtml(reply.text)}</div>
+                                <div class="reply-text">${formatTextWithLineBreaks(reply.text)}</div>
                                 <div class="reply-actions">
                                     <button class="btn-like-reply" onclick="likeComment(${reply.id}, this)">
                                         ❤️ <span class="like-count">${reply.likes || 0}</span>
