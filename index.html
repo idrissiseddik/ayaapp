@@ -254,6 +254,65 @@ body{
     align-items: center;
     justify-content: center;
 }
+
+/* ========== BANNIÈRE LEQURAN ========== */
+.lequran-banner {
+    margin: 12px;
+    background: linear-gradient(135deg, #0d1a2b 0%, #1a3a2a 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+.lequran-banner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.lequran-banner .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    gap: 12px;
+}
+.lequran-banner .banner-icon {
+    background: rgba(255, 215, 0, 0.15);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #ffd700;
+}
+.lequran-banner .banner-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.lequran-banner .banner-message {
+    font-size: 12px;
+    color: #d4e8d4;
+    line-height: 1.6;
+}
+.lequran-banner .banner-arrow {
+    color: #ffd700;
+    font-size: 18px;
+    background: rgba(255, 215, 0, 0.2);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 480px) {
     .banner-content { padding: 10px 12px; }
     .banner-icon { width: 40px; height: 40px; font-size: 20px; }
@@ -769,13 +828,28 @@ body{
     </div>
 </div>
 
-<!-- RADIO -->
+<!-- BANNIÈRE RADIO -->
 <div class="radio-banner" onclick="window.open('https://radiocoran.vercel.app', '_blank')">
     <div class="banner-content">
         <div class="banner-icon"><i class="fas fa-head-side-quran"></i></div>
         <div class="banner-text">
             <div class="banner-title"><i class="fas fa-mosque"></i> راديو القرآن الكريم <i class="fas fa-volume-up"></i></div>
             <div class="banner-message">🎧 استمع لتلاوات خاشعة من أشهر القراء الآن<br><span style="font-size: 11px; color: #ffd966;">✨ اضغط هنا للاستماع المباشر ✨</span></div>
+        </div>
+        <div class="banner-arrow"><i class="fas fa-chevron-left"></i></div>
+    </div>
+</div>
+
+<!-- BANNIÈRE LEQURAN (NOUVELLE) -->
+<div class="lequran-banner" onclick="window.open('https://lequran.vercel.app', '_blank')">
+    <div class="banner-content">
+        <div class="banner-icon"><i class="fas fa-book-quran"></i></div>
+        <div class="banner-text">
+            <div class="banner-title"><i class="fas fa-star"></i> تصفح القرآن الكريم <i class="fas fa-star"></i></div>
+            <div class="banner-message">
+                تَدَبَّرْ آيَاتِهِ، اِسْتَمِعْ لِتَرْتِيلِهِ، وَاحْفَظْ كِتَابَ اللهِ<br>
+                <span style="font-size: 11px; color: #ffd700;">📖 اضغط لقراءة وحفظ القرآن الكريم 📖</span>
+            </div>
         </div>
         <div class="banner-arrow"><i class="fas fa-chevron-left"></i></div>
     </div>
