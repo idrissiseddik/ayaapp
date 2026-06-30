@@ -188,139 +188,67 @@ body{
     margin-right: 8px;
 }
 
-/* ========== BANNIÈRE RADIO ========== */
-.radio-banner {
-    margin: 12px;
-    background: linear-gradient(135deg, #1e2a3a 0%, #0f1724 100%);
-    border-radius: 16px;
-    overflow: hidden;
+/* ========== كاروسيل المواقع الصديقة (تحت الأزرار) ========== */
+.sites-carousel-wrapper {
+    margin: 10px 12px 15px 12px;
+    background: white;
+    border-radius: 24px;
+    padding: 18px 10px 20px 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border: 1px solid rgba(46, 204, 113, 0.15);
+}
+.sites-carousel-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.sites-carousel-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--main), var(--border-green));
+    margin: 6px auto 0;
+    border-radius: 10px;
+}
+.site-card {
+    background: #fafffe;
+    border-radius: 20px;
+    padding: 22px 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(46, 204, 113, 0.12);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(46, 204, 113, 0.3);
-}
-.radio-banner:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-.banner-content {
+    height: 90px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    gap: 12px;
-}
-.banner-icon {
-    background: rgba(46, 204, 113, 0.15);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    font-size: 24px;
-    color: var(--border-green);
-    animation: pulse 2s infinite;
-}
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-}
-.banner-text {
-    flex: 1;
-}
-.banner-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffd966;
-    margin-bottom: 4px;
-    display: flex;
     align-items: center;
-    gap: 6px;
+    margin: 0 5px;
+    background: linear-gradient(145deg, #fafffe, #f0f7f2);
 }
-.banner-message {
-    font-size: 12px;
-    color: #e0e0e0;
-    line-height: 1.4;
+.site-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(25, 135, 84, 0.15);
+    border-color: var(--border-green);
 }
-.banner-arrow {
-    color: var(--border-green);
-    font-size: 18px;
-    background: rgba(46, 204, 113, 0.2);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.site-card .site-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a2e2a;
+    letter-spacing: 0.5px;
 }
-
-/* ========== BANNIÈRE LEQURAN ========== */
-.lequran-banner {
-    margin: 12px;
-    background: linear-gradient(135deg, #0d1a2b 0%, #1a3a2a 100%);
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(255, 215, 0, 0.3);
+.site-card .site-name i {
+    display: none; /* إخفاء الأيقونات */
 }
-.lequran-banner:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-.lequran-banner .banner-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    gap: 12px;
-}
-.lequran-banner .banner-icon {
-    background: rgba(255, 215, 0, 0.15);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: #ffd700;
-}
-.lequran-banner .banner-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffd700;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.lequran-banner .banner-message {
-    font-size: 12px;
-    color: #d4e8d4;
-    line-height: 1.6;
-}
-.lequran-banner .banner-arrow {
-    color: #ffd700;
-    font-size: 18px;
-    background: rgba(255, 215, 0, 0.2);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 @media (max-width: 480px) {
-    .banner-content { padding: 10px 12px; }
-    .banner-icon { width: 40px; height: 40px; font-size: 20px; }
-    .banner-title { font-size: 14px; }
-    .banner-message { font-size: 11px; }
-    .aya-text { font-size: 24px; }
-    .verse-title { font-size: 18px; }
-    .divine-message { font-size: 12px; padding: 6px 12px; }
+    .site-card { height: 75px; padding: 15px 8px; }
+    .site-card .site-name { font-size: 18px; }
+    .sites-carousel-title { font-size: 17px; }
 }
 
 /* ========== CARTE COMMENTAIRE PARENT ========== */
@@ -828,30 +756,35 @@ body{
     </div>
 </div>
 
-<!-- BANNIÈRE RADIO -->
-<div class="radio-banner" onclick="window.open('https://radiocoran.vercel.app', '_blank')">
-    <div class="banner-content">
-        <div class="banner-icon"><i class="fas fa-head-side-quran"></i></div>
-        <div class="banner-text">
-            <div class="banner-title"><i class="fas fa-mosque"></i> راديو القرآن الكريم <i class="fas fa-volume-up"></i></div>
-            <div class="banner-message">🎧 استمع لتلاوات خاشعة من أشهر القراء الآن<br><span style="font-size: 11px; color: #ffd966;">✨ اضغط هنا للاستماع المباشر ✨</span></div>
-        </div>
-        <div class="banner-arrow"><i class="fas fa-chevron-left"></i></div>
-    </div>
-</div>
+<!-- ========== كاروسيل المواقع الصديقة (تحت الأزرار) ========== -->
+<div class="sites-carousel-wrapper">
+    <div class="sites-carousel-title">مواقع صديقة</div>
 
-<!-- BANNIÈRE LEQURAN (NOUVELLE) -->
-<div class="lequran-banner" onclick="window.open('https://lequran.vercel.app', '_blank')">
-    <div class="banner-content">
-        <div class="banner-icon"><i class="fas fa-book-quran"></i></div>
-        <div class="banner-text">
-            <div class="banner-title"><i class="fas fa-star"></i> تصفح القرآن الكريم <i class="fas fa-star"></i></div>
-            <div class="banner-message">
-                تَدَبَّرْ آيَاتِهِ، اِسْتَمِعْ لِتَرْتِيلِهِ، وَاحْفَظْ كِتَابَ اللهِ<br>
-                <span style="font-size: 11px; color: #ffd700;">📖 اضغط لقراءة وحفظ القرآن الكريم 📖</span>
+    <div id="sitesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true">
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="site-card" onclick="window.open('https://radiocoran.vercel.app', '_blank')">
+                    <div class="site-name">راديو القرآن الكريم</div>
+                </div>
             </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="site-card" onclick="window.open('https://tilawatquran.vercel.app', '_blank')">
+                    <div class="site-name">تلاوة و حفظ القرآن الكريم</div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="site-card" onclick="window.open('https://svque.vercel.app', '_blank')">
+                    <div class="site-name">منصة فضاء المعرفة</div>
+                </div>
+            </div>
+
         </div>
-        <div class="banner-arrow"><i class="fas fa-chevron-left"></i></div>
+        <!-- تم إزالة الأسهم والمؤشرات -->
     </div>
 </div>
 
@@ -1359,6 +1292,10 @@ showWelcomeModal();
 loadAyah(); 
 updateCommentsCount(); 
 setInterval(()=>{ updateCommentsCount(); },30000);
+</script>
+
+<!-- Bootstrap JS (pour le carrousel) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
 </script>
 </body>
 </html>
